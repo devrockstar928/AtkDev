@@ -1,0 +1,153 @@
+<ul class="nav nav-tabs  m-tabs-line m-tabs-line--primary" role="tablist">
+    <li class="nav-item m-tabs__item mr-3" (click)="filer('all')">
+      <a class="nav-link m-tabs__link active" data-toggle="tab" href="#all" role="tab">
+        <small>All</small>
+      </a>
+    </li>
+  
+    <li class="nav-item m-tabs__item mr-3" (click)="filer('like')">
+      <a class="nav-link m-tabs__link" data-toggle="tab" href="#like" role="tab">
+        <small>Likes</small>
+      </a>
+    </li>
+  
+    <li class="nav-item m-tabs__item mr-3" (click)="filer('comment')">
+      <a class="nav-link m-tabs__link" data-toggle="tab" href="#comment" role="tab">
+        <small>Comment</small>
+      </a>
+    </li>
+  
+    <li class="nav-item m-tabs__item mr-3" (click)="filer('subscription')">
+      <a class="nav-link m-tabs__link" data-toggle="tab" href="#sub" role="tab">
+        <small>Subscriptions</small>
+      </a>
+    </li>
+  </ul>
+  
+  <div class="tab-pane  m-scrollable" [hidden]="filtertype != 'all'" role="tabpanel">
+    <div class="m-list-timeline">
+      <div class="m-list-timeline__group" id="like">
+        <div class="m-list-timeline__heading">
+            LIKES (Post ID)
+        </div>
+        <div class="m-list-timeline__items">
+          <div class="m-list-timeline__item" *ngFor="let stream of streams.likes">
+            <span class="m-list-timeline__badge m-list-timeline__badge--state-success"></span>
+            <a href="" class="m-list-timeline__text">
+              <small>{{stream.post_id}}</small>
+            </a>
+            <span class="m-list-timeline__time" [style.width.px]="90">
+              <small>{{stream.liked_date | date:'short'}}</small>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <hr />
+      <div class="m-list-timeline">
+        <div class="m-list-timeline__group" id="comment">
+          <div class="m-list-timeline__heading">
+              COMMENTS (Post ID)
+          </div>
+          <div class="m-list-timeline__items">
+            <div class="m-list-timeline__item" *ngFor="let stream of streams.comments">
+              <span class="m-list-timeline__badge m-list-timeline__badge--state-success"></span>
+              <a href="" class="m-list-timeline__text">
+                <small>{{stream.post_id}} - {{stream.comment}}</small>
+              </a>
+              <span class="m-list-timeline__time" [style.width.px]="90">
+                <small>{{stream.created_at | date:'short'}}</small>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    <hr />
+      <div class="m-list-timeline">
+        <div class="m-list-timeline__group" id="sub">
+          <div class="m-list-timeline__heading">
+            Subscriptions
+          </div>
+          <div class="m-list-timeline__items">
+            <div class="m-list-timeline__item" *ngFor="let stream of streams.subscribtions">
+              <span class="m-list-timeline__badge m-list-timeline__badge--state-success"></span>
+              <a href="" class="m-list-timeline__text">
+                <small>Subscribed to {{stream.cc_first_name}} + {{stream.cc_last_name}} - {{stream.tier_id}}</small>
+              </a>
+              <span class="m-list-timeline__time" [style.width.px]="90">
+                <small>{{stream.creation_date | date:'short'}}</small>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    <hr />
+  </div>
+  
+  <div class="tab-pane  m-scrollable" [hidden]="filtertype != 'like'">
+    <div class="m-list-timeline">
+      <div class="m-list-timeline__group" id="like">
+        <div class="m-list-timeline__heading">
+          {{filtertype}}
+        </div>
+        <div class="m-list-timeline__items">
+          <div class="m-list-timeline__item" *ngFor="let stream of streams.likes">
+            <span class="m-list-timeline__badge m-list-timeline__badge--state-success"></span>
+            <a href="" class="m-list-timeline__text">
+              <small>{{stream.post_id}}</small>
+            </a>
+            <span class="m-list-timeline__time" [style.width.px]="90">
+              <small>{{stream.liked_date | date:'short'}}</small>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="tab-pane  m-scrollable" [hidden]="filtertype != 'comment'">
+    <div class="m-list-timeline">
+      <div class="m-list-timeline__group" id="comment">
+        <div class="m-list-timeline__heading">
+          {{filtertype}}
+        </div>
+        <div class="m-list-timeline__items">
+          <div class="m-list-timeline__item" *ngFor="let stream of streams.comments">
+            <span class="m-list-timeline__badge m-list-timeline__badge--state-success"></span>
+            <a href="" class="m-list-timeline__text">
+              <small>{{stream.post_id}} - {{stream.comment}}</small>
+            </a>
+            <span class="m-list-timeline__time" [style.width.px]="90">
+              <small>{{stream.created_at | date:'short'}}</small>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="tab-pane  m-scrollable" [hidden]="filtertype != 'subscription'">
+    <div class="m-list-timeline">
+      <div class="m-list-timeline__group" id="sub">
+        <div class="m-list-timeline__heading">
+          {{filtertype}}
+        </div>
+        <div class="m-list-timeline__items">
+          <div class="m-list-timeline__item" *ngFor="let stream of streams.subscribtions">
+            <span class="m-list-timeline__badge m-list-timeline__badge--state-success"></span>
+            <a href="" class="m-list-timeline__text">
+              <small>Subscribed to {{stream.cc_first_name}} {{stream.cc_last_name}} - {{stream.tier_id}}</small>
+            </a>
+            <span class="m-list-timeline__time" [style.width.px]="90">
+              <small>{{stream.creation_date | date:'short'}}</small>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="">
+    <mat-paginator (page)="paginate($event)" [length]="100" [pageSize]="5">
+  </mat-paginator>
+  </div>
+  

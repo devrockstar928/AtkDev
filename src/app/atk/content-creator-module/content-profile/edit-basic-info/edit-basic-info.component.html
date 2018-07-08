@@ -1,0 +1,246 @@
+<mat-card>
+  <mat-card-content>
+
+    <!-- <form class="m-form m-form--fit m-form--label-align-right m-form--group-seperator-dashed"> -->
+    <form *ngIf="currentUser">
+      <div class="m-portlet__body">
+        <!-- <div class="form-group m-form__group row">
+              <label class="col-2 col-form-label">
+                image
+              </label>
+              <div class="col-10">
+              </div>
+            </div> -->
+        <div class="row">
+          <div class="col-9">
+
+            <!-----------------------------end of firstname -------------->
+            <div class="form-group m-form__group row">
+              <label class="col-2 col-form-label">
+                First Name
+              </label>
+              <div class="col-10">
+                <input [(ngModel)]="currentUser.first_name" name="first_name" [ngClass]="{'is-valid':currentUser.first_name}" class="form-control m-input"
+                  type="text" placeholder="enter your first name...">
+              </div>
+            </div>
+            <!-----------------------------end of firstname -------------->
+            <div class="form-group m-form__group row">
+              <label class="col-2 col-form-label">
+                Last Name
+              </label>
+              <div class="col-10">
+                <input [(ngModel)]="currentUser.last_name" name="last_name" class="form-control m-input" type="text" placeholder="enter your last name...">
+              </div>
+            </div>
+            <!-----------------------------end of lastname -------------->
+            <div class="form-group m-form__group row">
+              <label class="col-2 col-form-label">
+                User Name
+              </label>
+              <div class="col-10">
+                <input [(ngModel)]="currentUser.user_name" name="user_name" [ngClass]="{'is-valid':currentUser.user_name}" class="form-control m-input"
+                  type="text" placeholder="enter your username...">
+              </div>
+            </div>
+            <!-----------------------------end of username -------------->
+            <div class="form-group m-form__group row">
+              <label class="col-2 col-form-label">
+                Email
+              </label>
+              <div class="col-10">
+                <input [(ngModel)]="currentUser.email" name="email" [ngClass]="{'is-valid':currentUser.email}" class="form-control m-input"
+                  type="text" placeholder="Email ...">
+              </div>
+            </div>
+            <!------------------ -------------->
+          </div>
+          <!------------------ -------------->
+          <div class="col-3">
+            <div class="card mb-2">
+              <img [src]="currentUser.profile_picture" alt="your image" class="card-img-top p-2" />
+              <div class="card-body p-1 text-center">
+                  <label type="button" class="btn btn-sm btn-primary m-0 p-0" [style.width.%]="100">
+                      <input type="file" name="userPhoto" accept="image/*" #imageFile (change)="fileChangeEvent($event)" />
+                    </label>
+                </div>
+            </div>
+
+          </div>
+          <!------------------ -------------->
+        </div>
+        <!-----------------------------end of username -------------->
+        <div class="form-group m-form__group row">
+          <label class="col-2 col-form-label">
+            Level
+          </label>
+          <div class="col-10">
+            <input disabled [(ngModel)]="currentUser.level" name="level" class="form-control m-input" type="text" placeholder="Level ...">
+          </div>
+        </div>
+        <!-----------------------------end of username -------------->
+        <div class="form-group m-form__group row">
+          <label class="col-2 col-form-label">
+            XP
+          </label>
+          <div class="col-10">
+            <input disabled [(ngModel)]="currentUser.xp" name="xp" class="form-control m-input" type="text" placeholder="Xp ...">
+          </div>
+        </div>
+        <!-----------------------------end of username -------------->
+        <div class="form-group m-form__group row">
+          <label class="col-2 col-form-label">
+            Trophy
+          </label>
+          <div class="col-10">
+            <input disabled [(ngModel)]="currentUser.trophy" name="trophy" class="form-control m-input" type="text" placeholder="Trophy ...">
+          </div>
+        </div>
+
+        <!-----------------------------end of username -------------->
+        <div class="form-group m-form__group row">
+          <label class="col-2 col-form-label">
+            Profile Description
+          </label>
+          <div class="col-10">
+            <textarea [(ngModel)]="currentUser.profile_description" name="profile_description" class="form-control m-input" placeholder="Profile Description ..."
+              cols="30" rows="2"></textarea>
+          </div>
+        </div>
+        <!-----------------------------end of description -------------->
+
+        <fieldset>
+          <legend>Address:</legend>
+
+          <div class="row">
+            <div class="col offset-1">
+
+              <div class="form-group m-form__group row">
+                <label class="col-2 col-form-label">
+                  Country
+                </label>
+                <div class="col-10">
+                  <input [(ngModel)]="currentUser.country" name="country" [ngClass]="{'is-valid':currentUser.country}" class="form-control m-input"
+                    type="text" placeholder="enter your country...">
+                </div>
+              </div>
+              <!-----------------------------end of countrt -------------->
+              <div class="form-group m-form__group row">
+                <label class="col-2 col-form-label">
+                  City
+                </label>
+                <div class="col-10">
+                  <input [(ngModel)]="currentUser.city" name="city" class="form-control m-input" type="text" placeholder="enter your city.....">
+                </div>
+              </div>
+              <!-----------------------------end of city -------------->
+              <div class="form-group m-form__group row">
+                <label class="col-2 col-form-label">
+                  Line 1
+                </label>
+                <div class="col-10">
+                  <input [(ngModel)]="currentUser.line1" name="line1" class="form-control m-input" type="text" placeholder="enter your line...">
+                </div>
+              </div>
+              <!-----------------------------end of username -------------->
+              <div class="form-group m-form__group row">
+                <label class="col-2 col-form-label">
+                  State
+                </label>
+                <div class="col-10">
+                  <input [(ngModel)]="currentUser.state" name="state" class="form-control m-input" type="text" placeholder="enter your state...">
+                </div>
+              </div>
+              <!-----------------------------end of State -------------->
+              <div class="form-group m-form__group row">
+                <label class="col-2 col-form-label">
+                  Postal Code
+                </label>
+                <div class="col-10">
+                  <input [(ngModel)]="currentUser.postal_code" name="postal_code" [ngClass]="{'is-valid':currentUser.postal_code}" class="form-control m-input"
+                    type="text" placeholder="enter your postalcode...">
+                </div>
+              </div>
+              <!-----------------------------end of Postal Code -------------->
+            </div>
+          </div>
+
+        </fieldset>
+        <!------------------------------ address fieldset ------------------------------------------------>
+        <!-- <fieldset>
+        <legend>Social Media:</legend>
+  
+        <div class="row">
+          <div class="col offset-1">
+  
+            <div class="form-group m-form__group row">
+              <label class="col-2 col-form-label">
+                Personal Website
+              </label>
+              <div class="col-10">
+                <input [(ngModel)]="currentUser.website" class="form-control m-input" type="text" placeholder="enter your Personal Website...">
+              </div>
+            </div>
+            <div class="form-group m-form__group row">
+              <label class="col-2 col-form-label">
+                Twitch
+              </label>
+              <div class="col-10">
+                <input [(ngModel)]="currentUser.twitch" [ngClass]="{'is-valid':currentUser.twitch}" class="form-control m-input" type="text" placeholder="enter your Twitch.....">
+              </div>
+            </div>
+            <div class="form-group m-form__group row">
+              <label class="col-2 col-form-label">
+                Facebook
+              </label>
+              <div class="col-10">
+                <input [(ngModel)]="currentUser.facebook" class="form-control m-input" type="text" placeholder="enter your Facebook...">
+              </div>
+            </div>
+            <div class="form-group m-form__group row">
+              <label class="col-2 col-form-label">
+                Twitter
+              </label>
+              <div class="col-10">
+                <input [(ngModel)]="currentUser.twitter" class="form-control m-input" type="text" placeholder="enter your Twitter...">
+              </div>
+            </div>
+            <div class="form-group m-form__group row">
+              <label class="col-2 col-form-label">
+                Instagram
+              </label>
+              <div class="col-10">
+                <input [(ngModel)]="currentUser.instagram" class="form-control m-input" type="text" placeholder="enter your Instagram...">
+              </div>
+            </div>
+          </div>
+        </div>
+  
+      </fieldset> -->
+        <!------------------------------ address fieldset ------------------------------------------------>
+        <!------------------------------------------------------------------------------>
+        <div class="m-portlet__foot m-portlet__foot--fit">
+          <div class="m-form__actions">
+            <div class="row">
+              <div class="col-2"></div>
+              <div class="col-10">
+                <button mat-raised-button class="btn btn-outline-success float-left mr-3" (click)="editProfile()">
+                  Save
+                  <i class="fa fa-save" aria-hidden="true"></i>
+                </button>
+                <button mat-raised-button class="btn btn-outline-warning float-left">
+                  Reset
+                  <i class="fa fa-reset" aria-hidden="true"></i>
+                </button>
+                <!-- <button mat-raised-button class="btn btn-outline-primary float-right" (click)="backTolist()">
+                  back to list
+                  <i class="fa fa-reply" aria-hidden="true"></i>
+                </button> -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </mat-card-content>
+</mat-card>

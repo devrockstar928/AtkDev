@@ -1,0 +1,24 @@
+<div class="card">
+  <div class="card-header text-center">
+    View Association
+    <button mat-raised-button class="btn btn-primary float-right" [routerLink]="['../../all']">
+      back to list
+      <i class="fa fa-reply" aria-hidden="true"></i>
+    </button>
+  </div>
+  <div class="card-body">
+    <div class="d-flex flex-row text-center">
+      <span class="mr-2 text-secondary">Content Creator Manager</span>
+      <b class="mr-2 text-primary">{{association?.ccm_users?.first_name}} {{association?.ccm_users?.last_name}}</b>
+      <span class="mr-2 text-secondary"><=Manage=></span>
+        <span class="mr-2 text-secondary">Content Creator =></span>
+        <b class="mr-2 text-primary">{{association?.cc_users?.first_name}} {{association?.cc_users?.last_name}}</b>
+    </div>
+    <div class="d-flex flex-column">
+      <h3 class="text-warning text-center my-3">Privileges</h3>
+      <hr />
+      <div class="d-flex flex-row"><span class="mr-2 text-secondary">Posts</span><span class="mr-2 text-secondary">=></span><b class="mr-2 text-primary">{{getPrivilegeText(association?.privileges?.posts)}}</b></div>
+      <div class="d-flex flex-row"><span class="mr-2 text-secondary">Comments</span><span class="mr-2 text-secondary">=></span><b class="mr-2 text-primary">{{getPrivilegeText(association?.privileges?.comments)}}</b></div>
+    </div>
+  </div>
+</div>

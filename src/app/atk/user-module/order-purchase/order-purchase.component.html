@@ -1,0 +1,173 @@
+<!-- <form class="m-form m-form--fit m-form--label-align-right m-form--group-seperator-dashed"> -->
+<div class="card">
+  <div class="card-header">New Order</div>
+  <div class="card-body">
+    <form>
+      <mat-accordion [multi]="true">
+        <!----------------------basic info---------------------------------------------->
+        <mat-expansion-panel [expanded]="true">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              Poster
+            </mat-panel-title>
+            <mat-panel-description>
+              Informations
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+
+          <div class="form-group m-form__group row">
+            <label class="col-2 col-form-label">
+              size
+            </label>
+            <div class="col-10">
+              <select [(ngModel)]="newOrder.size" name="size" class="form-control m-input" type="text" placeholder="">
+                <option></option>
+                <option value="5x3922">5x3922</option>
+                <option value="5x34">5x34</option>
+                <option value="5x30">5x30</option>
+              </select>
+            </div>
+          </div>
+          <!-----------------------------end of description -------------->
+          <div class="form-group m-form__group row">
+            <label class="col-2 col-form-label">
+              price
+            </label>
+            <div class="col-10">
+              <input [(ngModel)]="newOrder.price" name="price" class="form-control m-input" type="text" placeholder="">
+            </div>
+          </div>
+          <!-----------------------------end of firstname -------------->
+          <div class="form-group m-form__group row">
+              <label class="col-2 col-form-label">
+                  Is Signed
+              </label>
+              <div class="col-10">
+                <mat-checkbox [(ngModel)]="newOrder.signed" name="signed"></mat-checkbox>
+              </div>
+            </div>
+        </mat-expansion-panel>
+        <!-------------------------------------------------------------------->
+        <mat-expansion-panel [expanded]="true">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              User
+            </mat-panel-title>
+            <mat-panel-description>
+              Informations
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+
+          <div class="form-group m-form__group row">
+            <label class="col-2 col-form-label">
+              Name
+            </label>
+            <div class="col-10">
+              <input [(ngModel)]="newOrder.name" name="name" [ngClass]="{'is-valid':newOrder.name}" class="form-control m-input" type="text"
+                placeholder="enter your name...">
+            </div>
+          </div>
+          <!-----------------------------end of lastname -------------->
+          <div class="form-group m-form__group row">
+            <label class="col-2 col-form-label">
+              phone
+            </label>
+            <div class="col-10">
+              <input [(ngModel)]="newOrder.phone" name="phone" [ngClass]="{'is-valid':newOrder.phone}" class="form-control m-input" type="text"
+                placeholder="enter your alias...">
+            </div>
+          </div>
+          <!-----------------------------end of username -------------->
+          <div class="form-group m-form__group row">
+            <label class="col-2 col-form-label">
+              Email
+            </label>
+            <div class="col-10">
+              <input [(ngModel)]="newOrder.email" name="email" [ngClass]="{'is-valid':newOrder.email}" class="form-control m-input" type="text"
+                placeholder="Email ...">
+            </div>
+          </div>
+          <!-----------------------------end of username -------------->
+
+        </mat-expansion-panel>
+        <!-------------------------------------------------------------------->
+        <mat-expansion-panel [expanded]="true">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              Address
+            </mat-panel-title>
+            <mat-panel-description>
+
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          <div class="form-group m-form__group row">
+            <label class="col-2 col-form-label">
+              Country
+            </label>
+            <div class="col-10">
+              <input [(ngModel)]="newOrder.country" name="country" [ngClass]="{'is-valid':newOrder.country}" class="form-control m-input"
+                type="text" placeholder="enter your country...">
+            </div>
+          </div>
+          <!-----------------------------end of countrt -------------->
+          <div class="form-group m-form__group row">
+            <label class="col-2 col-form-label">
+              City
+            </label>
+            <div class="col-10">
+              <input [(ngModel)]="newOrder.city" name="city" class="form-control m-input" type="text" placeholder="enter your city.....">
+            </div>
+          </div>
+          <!-----------------------------end of city -------------->
+          <div class="form-group m-form__group row">
+            <label class="col-2 col-form-label">
+              Line 1
+            </label>
+            <div class="col-10">
+              <input [(ngModel)]="newOrder.line1" name="line1" class="form-control m-input" type="text" placeholder="enter your line...">
+            </div>
+          </div>
+          <!-----------------------------end of username -------------->
+          <div class="form-group m-form__group row">
+            <label class="col-2 col-form-label">
+              State
+            </label>
+            <div class="col-10">
+              <input [(ngModel)]="newOrder.state" name="state" class="form-control m-input" type="text" placeholder="enter your state...">
+            </div>
+          </div>
+          <!-----------------------------end of State -------------->
+          <div class="form-group m-form__group row">
+            <label class="col-2 col-form-label">
+              Postal Code
+            </label>
+            <div class="col-10">
+              <input [(ngModel)]="newOrder.postal_code" [ngClass]="{'is-valid':newOrder.postal_code}" class="form-control m-input" type="text"
+                placeholder="enter your postalcode...">
+            </div>
+          </div>
+          <!-----------------------------end of Postal Code -------------->
+        </mat-expansion-panel>
+        <!-------------------------------------------------------------------->
+      </mat-accordion>
+      cc_id?: number; img?: string; sku_id?: string;
+      <!------------------------------------------------------------------------------>
+      <div class="m-portlet__foot m-portlet__foot--fit">
+        <div class="m-form__actions">
+          <div class="row">
+            <div class="col-2"></div>
+            <div class="col-10">
+              <button class="btn btn-success">
+                Submit
+              </button>
+              <button class="btn btn-secondary">
+                Cancel
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+
+  </div>
+</div>

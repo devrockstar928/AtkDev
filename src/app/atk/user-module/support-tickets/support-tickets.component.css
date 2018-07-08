@@ -1,0 +1,7 @@
+.mat-column-id { flex: 0 0 5%; }
+.mat-column-contentCreator { flex: 0 0 15%; }
+.mat-column-sender { flex: 0 0 15%; }
+.mat-column-message { flex: 0 0 30%; }
+.mat-column-reason { flex: 0 0 20%; }
+.mat-column-createdAt { flex: 0 0 10%; }
+.mat-column-updatedAt { flex: 0 0 10%; }

@@ -1,0 +1,135 @@
+<div class="card">
+  <div class="card-header">
+    <div class="row">
+      <div class="col p-0 pl-1" (click)="showvlaue='Contacts'">
+        <button [color]="showvlaue=='Contacts'? 'accent' :''" class="btn-block" mat-raised-button>Contacts</button>
+
+      </div>
+      <div class="col p-0 pl-1" (click)="showvlaue='Chat'">
+        <button [color]="showvlaue=='Chat'? 'accent' :''" class="btn-block" mat-raised-button>Chat</button>
+      </div>
+    </div>
+  </div>
+  <div class="card-body">
+    <div [hidden]="showvlaue !='Contacts'">
+      <div class="tab-pane  m-scrollable" id="contacts" role="tabpanel">
+        <div [style.cursor]="'pointer'" [ngClass]="{'bg-info text-white':currentContact==user,'bg-light':currentContact!=user}" class="media py-1 my-2"
+          *ngFor="let user of contacts" (click)="selectContact(user)">
+          <img class="mr-3" [src]="user.profile_picture" alt="">
+          <div class="media-body">
+            <span class="mt-0">{{user.id}} {{user.user_name}}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div [hidden]="showvlaue !='Chat'">
+
+
+
+
+
+
+
+
+
+
+
+      <div class="tab-pane active m-scrollable" id="m_quick_sidebar_tabs_messenger" role="tabpanel">
+        <div class="m-messenger m-messenger--message-arrow m-messenger--skin-light">
+          <div class="bg-light media py-1 my-2">
+            <img class="mr-3" [src]="currentContact?.profile_picture" alt="">
+            <div class="media-body">
+              <span class="mt-0">{{currentContact?.id}} {{currentContact?.user_name}}</span>
+            </div>
+          </div>
+          <div class="m-messenger__seperator"></div>
+
+          <div class="m-messenger__messages">
+
+            <div class="m-messenger__message m-messenger__message--out">
+              <div class="m-messenger__message-body">
+                <div class="m-messenger__message-arrow"></div>
+                <div class="m-messenger__message-content">
+                  <div class="m-messenger__message-text">
+                    Hi Megan. It's at 2.30PM
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+
+            <!-- <div class="m-messenger__datetime">
+              2:30PM
+            </div> -->
+
+            <div class="m-messenger__message m-messenger__message--in">
+              <div class="m-messenger__message-no-pic m--bg-fill-danger">
+                <span>
+                  {{msg.user.u_name.substr(0,3)}}
+                </span>
+              </div>
+              <div class="m-messenger__message-body">
+                <div class="m-messenger__message-arrow"></div>
+                <div class="m-messenger__message-content">
+                  <div class="m-messenger__message-username">
+                    {{msg.user.u_name}}
+                  </div>
+                  <div class="m-messenger__message-text">
+                    {{msg.text}}
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+
+            <div  *ngFor="let msg of currentMsgs" class="m-messenger__message m-messenger__message--in">
+              <div class="m-messenger__message-no-pic m--bg-fill-danger">
+                <span>
+                  {{msg.user.u_name.substr(0,3)}}
+                </span>
+              </div>
+              <div class="m-messenger__message-body">
+                <div class="m-messenger__message-arrow"></div>
+                <div class="m-messenger__message-content">
+                  <div class="m-messenger__message-username">
+                    {{msg.user.u_name}}
+                  </div>
+                  <div class="m-messenger__message-text">
+                    {{msg.text}}
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="m-messenger__seperator"></div>
+            <div class="m-messenger__form">
+              <div class="m-messenger__form-controls">
+                <input type="text" name="" [(ngModel)]="msg" placeholder="Type here..." class="m-messenger__form-input">
+              </div>
+              <div class="m-messenger__form-tools">
+                <a href="" class="m-messenger__form-attachment" (click)="sendMessage()">
+                  <i class=" la la-paperclip"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+          <!-------------------------m-messenger__messages---->
+        </div>
+      </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+</div>

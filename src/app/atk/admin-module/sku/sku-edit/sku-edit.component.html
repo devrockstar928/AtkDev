@@ -1,0 +1,54 @@
+
+<div class="card">
+    <div class="card-header text-center">
+      Product Edit
+      <button  mat-raised-button class="btn btn-outline-primary float-right" routerLink="../../">
+          back to list <i class="fa fa-reply" aria-hidden="true"></i>
+        </button>
+    </div>
+    <div class="card-body">
+      <form class="m-form m-form--fit m-form--label-align-right" [formGroup]="skuForm" novalidate>
+  
+        <mat-form-field class="mx-4" [style.display]="'block'">
+          <input matInput placeholder="Product Type" [ngClass]="{'is-valid': skuForm.get('product_type').valid , 'is-invalid': skuForm.get('product_type').invalid }"
+            formControlName="product_type">
+        </mat-form-field>
+  
+        <!---------------------------------------------------------------------------------------------------------------------------->
+        <mat-form-field class="mx-4" [style.display]="'block'">
+          <input matInput placeholder="Size" [ngClass]="{'is-valid': skuForm.get('size').valid , 'is-invalid': skuForm.get('size').invalid }"
+            formControlName="size">
+        </mat-form-field>
+  
+        <!---------------------------------------------------------------------------------------------------------------------------->
+        <mat-form-field class="mx-4" [style.display]="'block'">
+            <input matInput placeholder="Price" [ngClass]="{'is-valid': skuForm.get('price').valid , 'is-invalid': skuForm.get('price').invalid }"
+              formControlName="price">
+              <span matPrefix class="mx-1">$</span>          
+          </mat-form-field>
+    
+          <!---------------------------------------------------------------------------------------------------------------------------->
+              <mat-checkbox  class="mx-4" formControlName="is_signed">Is Signed</mat-checkbox> 
+      
+            <!---------------------------------------------------------------------------------------------------------------------------->
+  
+  
+        <div class="m-portlet__foot m-portlet__no-border m-portlet__foot--fit">
+          <div class="m-form__actions m-form__actions--solid">
+            <div class="row">
+              <div class="col-lg-2"></div>
+              <div class="col-lg-10">
+                <button  mat-raised-button color="primary" class="btn btn-success" [disabled]="skuForm.invalid" (click)="AddNewSku()">
+                  Save
+                </button>
+                <button  mat-raised-button class="btn btn-outline-secondary" routerLink="../">
+                  Cancel
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  

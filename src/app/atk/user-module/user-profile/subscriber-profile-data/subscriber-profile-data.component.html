@@ -1,0 +1,133 @@
+<mat-card>
+    <mat-card-content>
+  
+      <div class="row">
+        <div class="col">
+          <div class="row">
+            <label class="pl-3 pr-0 m-0"> First Name :</label>
+            <label class="">{{currentUser?.first_name}}</label>
+          </div>
+          <hr />
+          <!-----------------------------end of firstname -------------->
+          <div class="row">
+            <label class="pl-3 pr-0 m-0"> Last Name :</label>
+            <label class="">{{currentUser?.last_name}}</label>
+          </div>
+          <hr />
+          <!-----------------------------end of lastname -------------->
+          <div class="row">
+            <label class="pl-3 pr-0 m-0"> User Name :</label>
+            <label class="">{{currentUser?.user_name}}</label>
+          </div>
+          <hr />
+          <!-----------------------------end of username -------------->
+          <div class="row">
+            <label class="pl-3 pr-0 m-0"> Email :</label>
+            <label class="">{{currentUser?.email}}</label>
+          </div>
+          <hr />
+          <!-----------------------------end of username -------------->
+          <div class="row">
+            <label class="pl-3 pr-0 m-0"> Level :</label>
+            <label class="">{{currentUser?.level}}</label>
+          </div>
+          <hr />
+          <!-----------------------------end of username -------------->
+          <div class="row">
+            <label class="pl-3 pr-0 m-0"> XP :</label>
+            <label class="">{{currentUser?.xp}}</label>
+          </div>
+          <hr />
+          <!-----------------------------end of username -------------->
+          <div class="row">
+            <label class="pl-3 pr-0 m-0"> Next Level :</label>
+            <label class="">{{userXpObject?.nextLevelXP}}</label>
+          </div>
+          <hr />
+          <!-----------------------------end of description -------------->
+        </div>
+        <div class="col">
+          <div class="row">
+            <label class="pl-3 pr-0 m-0">Country :</label>
+            <label class="">{{currentUser?.country}}</label>
+          </div>
+          <hr />
+          <!-----------------------------end of countrt -------------->
+          <div class="row">
+            <label class="pl-3 pr-0 m-0">City :</label>
+            <label class="">{{currentUser?.city}}</label>
+          </div>
+          <hr />
+          <!-----------------------------end of city -------------->
+          <div class="row">
+            <label class="pl-3 pr-0 m-0">Line 1 :</label>
+            <label class="">{{currentUser?.line1}}</label>
+          </div>
+          <hr />
+          <!-----------------------------end of username -------------->
+          <div class="row">
+            <label class="pl-3 pr-0 m-0">State :</label>
+            <label class="">{{currentUser?.state}}</label>
+          </div>
+          <hr />
+          <!-----------------------------end of State -------------->
+          <div class="row">
+            <label class="pl-3 pr-0 m-0">Postal Code:</label>
+            <label class="m-0 ">{{currentUser?.postal_code}}</label>
+          </div>
+          <hr />
+          <!-----------------------------end of username -------------->
+          <div class="row">
+            <label class="pl-3 pr-0 m-0">Description :</label>
+            <label class="m-0 ">{{currentUser?.profile_description}}</label>
+          </div>
+          <hr />
+        </div>
+      </div>
+      <hr />
+      <!------------------------------------------------------------------------------>
+      <!-- <h4 class="text-center">XP Object</h4> -->
+        <!-- <div class="row">
+          <div class="col">
+            <label class="pr-0 mr-2 text-secondary">Current XP</label>
+            <span class="">{{userXpObject?.currentXP}}</span>
+          </div>
+          <div class="col">
+            <label class="x pr-0 mr-2 text-secondary">Current Level</label>
+            <span class="">{{userXpObject?.currentLevel}}</span>
+          </div>
+          <div class="col">
+            <label class="pr-0 mr-2 text-secondary">Next Level XP</label>
+            <span class="">{{userXpObject?.nextLevelXP}}</span>
+          </div>
+        </div> -->
+      <!-- <hr />
+      <h6 class="text-secondary">Completed Events</h6>
+      <ng-container *ngIf="userXpObject && userXpObject.completedEvents.length>0">
+
+          <div class="row bg-light text-warning my-2 py-2">
+              <label class="col">Event Name</label>
+              <label class="col">Event Value</label>
+            </div>
+          <div class="row bg-light text-warning my-1 py-1" *ngFor="let event of userXpObject.completedEvents">
+            <label class="col text-secondary">{{event.eventName}}</label>
+            <label class="col ">{{event.eventValue}}</label>
+          </div>
+        </ng-container> -->
+      <!------------------------------------------------------------------------------>
+      <!-- <div class="m-portlet__foot m-portlet__foot--fit">
+        <div class="m-form__actions">
+          <div class="row">
+            <div class="col-2"></div>
+            <div class="col-10">
+              <button mat-raised-button class="btn btn-outline-primary float-right" (click)="editProfile()">
+                Edit Profile
+                <i class="fa fa-edit" aria-hidden="true"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div> -->
+    </mat-card-content>
+  </mat-card>
+  

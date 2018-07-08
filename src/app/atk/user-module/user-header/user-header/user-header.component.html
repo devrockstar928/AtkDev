@@ -1,0 +1,49 @@
+<div id="m_header_topbar" class="m-topbar  m-stack m-stack--ver m-stack--general">
+  <div class="m-stack__item m-topbar__nav-wrapper">
+    <ul class="m-topbar__nav m-nav m-nav--inline">
+    
+      <li class="m-nav__item m-topbar__notifications m-topbar__notifications--img m-dropdown m-dropdown--large m-dropdown--header-bg-fill m-dropdown--arrow m-dropdown--align-center 	m-dropdown--mobile-full-width"
+        data-dropdown-toggle="click" data-dropdown-persistent="true">
+        <a href="#" class="m-nav__link m-dropdown__toggle" id="m_topbar_notification_icon">
+          <span class="m-nav__link-badge m-badge m-badge--dot m-badge--dot-small m-badge--danger"></span>
+          <span class="m-nav__link-icon">
+            <i class="flaticon-music-2"></i>
+          </span>
+        </a>
+        <div class="m-dropdown__wrapper">
+          <span class="m-dropdown__arrow m-dropdown__arrow--center"></span>
+          <div class="m-dropdown__inner">
+            <app-user-xp></app-user-xp>
+          </div>
+        </div>
+
+      </li>
+      <li class="m-nav__item m-topbar__user-profile m-topbar__user-profile--img  m-dropdown m-dropdown--medium m-dropdown--arrow m-dropdown--header-bg-fill m-dropdown--align-right m-dropdown--mobile-full-width m-dropdown--skin-light"
+        data-dropdown-toggle="click">
+        <a href="#" class="m-nav__link m-dropdown__toggle">
+          <span [hidden]="!currentUser.avatar" class="m-topbar__userpic">
+        <img alt="" class="rounded-circle" width="40" height="40" [src]="currentUser.avatar"
+        [style.position]="'absolute'" [style.top.px]="17" [style.left.px]="-4">      
+            <!-- <img [src]="currentUser.avatar" class="m--img-rounded m--marginless m--img-centered" alt="" /> -->
+          </span>
+          <span class="m-nav__link-icon">
+            <i class="fa fa-user-circle"></i>
+            </span>
+        </a>
+        <div class="m-dropdown__wrapper">
+          <span class="m-dropdown__arrow m-dropdown__arrow--right m-dropdown__arrow--adjust"></span>
+          <div class="m-dropdown__inner">
+            <app-user-profile></app-user-profile>
+          </div>
+        </div>
+      </li>
+      <li id="m_quick_sidebar_toggle" class="m-nav__item">
+        <a href="#" class="m-nav__link m-dropdown__toggle">
+          <span class="m-nav__link-icon">
+            <i class="flaticon-grid-menu"></i>
+          </span>
+        </a>
+      </li>
+    </ul>
+  </div>
+</div>

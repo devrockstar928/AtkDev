@@ -1,0 +1,66 @@
+
+<div class="card">
+  <div class="card-header text-center">
+    Tier Informations
+    <button  mat-raised-button class="btn btn-outline-primary float-right" routerLink="/creator/tiers">
+        back to list <i class="fa fa-reply" aria-hidden="true"></i>
+      </button>
+  </div>
+  <div class="card-body">
+    <form class="m-form m-form--fit m-form--label-align-right" [formGroup]="tierForm" novalidate>
+
+      <mat-form-field class="mx-4" [style.display]="'block'">
+        <input matInput placeholder="Tier Name" [ngClass]="{'is-valid': tierForm.get('tier_name').valid , 'is-invalid': tierForm.get('tier_name').invalid }"
+          formControlName="tier_name">
+      </mat-form-field>
+
+      <!---------------------------------------------------------------------------------------------------------------------------->
+      <mat-form-field class="mx-4" [style.display]="'block'">
+        <input matInput placeholder="Tier Value" [ngClass]="{'is-valid': tierForm.get('tier_value').valid , 'is-invalid': tierForm.get('tier_value').invalid }"
+          formControlName="tier_value">
+          <span matPrefix class="mx-1">$</span>          
+      </mat-form-field>
+
+      <!---------------------------------------------------------------------------------------------------------------------------->
+      <!-- <div [froalaEditor]  formControlName="name">Hello, Froala!</div> -->
+      <!-- <div [froalaEditor]>Hello, Froala!dskfljld</div> -->
+      <div class="row mx-4">
+        <div class="col-10">
+          <div formArrayName="tier_rewards">
+            <div *ngFor="let reward of tier_rewards?.controls; let i=index" [formGroupName]="i">
+              <div class="row"> 
+                <div class="col">
+                    <div [attr.id]="'d'+i" [froalaEditor]  formControlName="name">Hello, Froala!</div>
+                    <!-- <div [froalaEditor]>Hello, Froala!</div> -->
+                  <!-- <mat-form-field class="mx-4" [style.display]="'block'">
+                    <input matInput placeholder="item {{i + 1}}" [ngClass]="{'is-valid': reward.valid , 'is-invalid': reward.invalid }" formControlName="name">
+                    <span matPrefix class="mx-1"><i class="fa fa-gift"></i></span>
+                  </mat-form-field> -->
+                </div>
+              </div>
+              <hr />
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
+      <div class="m-portlet__foot m-portlet__no-border m-portlet__foot--fit">
+        <div class="m-form__actions m-form__actions--solid">
+          <div class="row">
+            <div class="col-lg-2"></div>
+            <div class="col-lg-10">
+              <button  mat-raised-button color="primary" class="btn btn-success" [disabled]="tierForm.invalid" (click)="AddNewTiers()">
+                Save
+              </button>
+              <button  mat-raised-button class="btn btn-outline-secondary" routerLink="/creator/tiers">
+                Cancel
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

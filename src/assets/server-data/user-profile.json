@@ -1,0 +1,37 @@
+{
+  "basicData": {
+    "PersonalWebsite": "",
+    "Facebook": "",
+    "Twitch": "",
+    "Instagram": "",
+    "Twitter": ""
+  },
+  "OrderHistory": {},
+  "SubscriptionHistory": {},
+  "LikeHistory": {},
+  "CommentHistory": {},
+  "Trophies": {},
+  "Level/XP": {},
+  "NumofFollowers": {},
+  "NumofPosts": {},
+  "NumofRevenue": {},
+  "Content": {},
+  "SocialMedia": {},
+  "Tiers": {},
+  "PostedContent": {},
+  "stream": {
+    "like a post": {
+      "post": "",
+      "date/time": ""
+    },
+    "commentpost": {
+
+      "post": "",
+      "date/time": ""
+    },
+    "subscribeTime": "",
+    "changesubscription": "",
+    "cancelsubscription": "",
+    "paymentdeclined": ""
+  }
+}

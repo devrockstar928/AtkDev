@@ -1,0 +1,143 @@
+<div id="m_quick_sidebar" class="py-0 pb-1 m-quick-sidebar m-quick-sidebar--tabbed m-quick-sidebar--skin-light" appunwraptag="">
+  <div class="m-quick-sidebar__content m--hide">
+    <span id="m_quick_sidebar_close" class="m-quick-sidebar__close">
+      <i class="la la-close"></i>
+    </span>
+    <ul id="m_quick_sidebar_tabs" class="nav nav-tabs m-tabs m-tabs-line m-tabs-line--brand my-2" role="tablist">
+      <li class="nav-item m-tabs__item" (click)="showvalue='Contacts'">
+        <a class="nav-link m-tabs__link active" [class.active]="showvalue=='Contacts'" data-toggle="tab" href="#m_quick_sidebar_tabs_settings"
+          role="tab">
+          Contacts
+        </a>
+      </li>
+      <li class="nav-item m-tabs__item" [style.pointer-events]="!currentContact?'none':''" (click)="showvalue='Chat'">
+        <a class="nav-link m-tabs__link" [class.active]="showvalue=='Chat'" data-toggle="tab" href="#m_quick_sidebar_tabs_messenger"
+          role="tab">
+          Chat
+        </a>
+      </li>
+
+    </ul>
+    <div>
+    </div>
+    <div class="row align-items-center bg-light border border-primary" *ngIf="currentContact && showvalue=='Chat'">
+
+      <div class="row col-7 my-2">
+        <img alt="" class="p-1 rounded-circle" width="35" height="34" [src]="currentContact?.profile_picture">
+        <!-- <img class="p-1 rounded" [src]="user.profile_picture" alt="" [style.width.%]="15" [style.height.%]="15"> -->
+        <div class="align-self-center">
+          <span class="mt-0">{{currentContact?.id}} {{currentContact?.user_name}}</span>
+        </div>
+      </div>
+      <div class="col p-0">
+        <div class="align-self-center mx-2">
+          <span *ngIf="currentContact?.is_blocked && userPrivilegs['block_users']>1">Unblock User</span>
+          <span *ngIf="!currentContact?.is_blocked && userPrivilegs['block_users']>1">Block User</span>
+          <mat-slide-toggle [labelPosition]="'before'" (change)="changeBlockUser(currentContact)" [checked]="!currentContact?.is_blocked &&!currentContact?.is_blocking_me">
+          </mat-slide-toggle>
+        </div>
+      </div>
+      <!-- <div class="col-1"></div> -->
+    </div>
+    <div class="tab-content">
+      <div [class.active]="showvalue=='Chat'" [hidden]="showvalue !='Chat'" class="tab-pane active m-scrollable" id="m_quick_sidebar_tabs_messenger"
+        role="tabpanel">
+        <div class="m-messenger m-messenger--message-arrow m-messenger--skin-light">
+          <div id="msgsg" class="m-messenger__messages row">
+
+            <div class="m-messenger__seperator my-2"></div>
+            <div class="row">
+              <div class="col-12">
+                <button mat-raised-button color="accent" (click)="loadMore()" class="btn-block" [ngClass]="{'m-loader m-loader--right m-loader--light': loading}">
+                  Load More Messages
+                </button>
+              </div>
+            </div>
+            <div class="m-messenger__seperator my-2"></div>
+
+            <div *ngFor="let msg of currentMsgs" class="col-12 row m-messenger__message m-messenger__message--{{msg.type}}">
+              <div *ngIf="msg.type=='in'" [ngClass]="{'text-white p-4':msg.type=='in'}" class="col-2 m-messenger__message-no-pic m--bg-fill-danger">
+                <span>
+                  {{msg.user.u_name.substr(0,3)}}
+                </span>
+              </div>
+              <div class="m-messenger__message-body col-10">
+                <div class="m-messenger__message-arrow" [hidden]="true"></div>
+                <div class="m-messenger__message-content ml-5">
+                  <div class="m-messenger__message-username" [ngClass]="{'text-white display-2':msg.type=='out'}">
+                    <strong>{{msg.user.u_name}}</strong>
+                  </div>
+                  <div class="m-messenger__message-text" [ngClass]="{'text-white display-2':msg.type=='out'}">
+                    {{msg.text}}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="m-messenger__seperator m-2"></div>
+
+          <div class="m-messenger__form">
+            <div class="m-messenger__form-controls">
+              <!-- <p class="lead emoji-picker-container" id="inputmsg" (keydown)="onKeyDown($event)"> -->
+              <input [disabled]="!currentContact || 
+                                  currentContact.is_blocked || 
+                                  currentContact.is_blocking_me ||
+                                  userPrivilegs['chat_messages']<3" (keyup)="onKey($event)" class="form-control" [(ngModel)]="msg"
+                placeholder="Type here..." class="m-messenger__form-input">
+              <!-- </p> -->
+            </div>
+            <div class="m-messenger__form-tools" [style.pointer-events]="(!currentContact || currentContact.is_blocked || currentContact.is_blocking_me)?'none':''">
+              <a href="" class="m-messenger__form-attachment" (click)="sendMessage()">
+                <i class="fa fa-send"></i>
+              </a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <div [class.active]="showvalue=='Contacts'" [hidden]="showvalue !='Contacts'" class="tab-pane  m-scrollable" id="m_quick_sidebar_tabs_settings"
+        role="tabpanel">
+        <!------------------------------------------------------------------------>
+        <!-- <p class="lead emoji-picker-container" id="inputmsg" (keydown)="onKeyDown($event)"> -->
+        <input #search class="form-control" placeholder="search..." class="m-messenger__form-input">
+        <!-- </p> -->
+        <!------------------------------------------------------------------------>
+        <hr />
+        <div class="row align-items-center" style="margin:0px" *ngFor="let user of uiSearch(search.value)">
+          <div [style.cursor]="'pointer'" 
+               class="col-8 row bg-light my-2" 
+               [ngClass]="{'bg-info text-white':currentContact==user,'bg-light':currentContact!=user}"
+            (click)="selectContact(user)">
+            <img alt="" class="p-1 rounded-circle mx-1" width="40" height="40" [src]="user.profile_picture">
+            <!-- <img class="p-1 rounded" [src]="user.profile_picture" alt="" [style.width.%]="15" [style.height.%]="15"> -->
+            <div class="align-self-center">
+              <span class="mt-0">{{user.id}} {{user.user_name}}</span>
+            </div>
+          </div>
+          <div class="col">
+            <div class="align-self-center mx-2">
+              <span *ngIf="user.is_blocked && userPrivilegs['block_users']>1">Unblock User</span>
+              <span *ngIf="!user.is_blocked && userPrivilegs['block_users']>1">Block User</span>
+              <mat-slide-toggle (change)="changeBlockUser(user)" [checked]="!user.is_blocked && !user.is_blocking_me">
+              </mat-slide-toggle>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="tab-pane  m-scrollable" id="m_quick_sidebar_tabs_logs" role="tabpanel">
+        <div class="m-list-timeline">
+          <div class="m-list-timeline__group">
+            <div class="m-list-timeline__heading">
+            </div>
+            <div class="m-list-timeline__items">
+              <div class="m-list-timeline__item">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

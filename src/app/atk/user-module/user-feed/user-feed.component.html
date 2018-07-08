@@ -1,0 +1,132 @@
+<div class="row">
+  <div class="col-xl-6 offset-3">
+    <div class="card mb-3" *ngFor="let feed of contentFeeds">
+      <div class="card-header py-2">
+        <div class="row align-items-center">
+          <div class="col-1">
+            <img alt="" class="rounded-circle" width="40" height="40" [src]="feed.avatar">
+          </div>
+          <div class="col-4">
+            {{feed.username}}
+          </div>
+          <div class="col">
+            <small>{{feed.created_time | date:'medium'}}</small>
+            <span class="float-right">{{feed.tier_value | currency}}</span>
+          </div>
+        </div>
+      </div>
+      <!---------------------------------------------------------------------------->
+      <img *ngIf="feed.post_data_type == 'image' || feed.post_data_type == '' " class="card-img-top" [src]="feed.images?feed.images :'./assets/app/media/posts/content.png'">
+      <!-- [src]="feed.images?feed.images :'./assets/app/media/posts/content.png'"> -->
+      <!-----------end of type image------------------------------------------------------------------>
+      <video *ngIf="feed.post_data_type == 'video'" class="card-img-top" controls>
+        <source [src]="feed.video_url" type="video/mp4 "> Your browser does not support the video tag.
+      </video>
+      <!-----------end of type video------------------------------------------------------------------>
+      <div class="card-body p-2">
+        <p *ngIf="feed.post_data_type == 'text'">
+          {{feed.description}}
+        </p>
+        <!-----------end of type text------------------------------------------------------------------>
+        <div class="row align-items-center">
+          <div class="col">
+            <i *ngIf="userPrivilegs['likes']>1"
+               class="fa fa-2x" 
+               (click)="toggleLike(feed)" 
+               [ngClass]="{ 'fa-heart-o text-mute':!feed.isliked,'fa-heart text-danger':feed.isliked}"></i>
+            <!------------------- add comment button -------->
+            <i *ngIf="userPrivilegs['comments']>1" class="text-mute fa fa-comment-o fa-2x" 
+                (click)="add_comment(feed);" 
+                [ngClass]="{ 'fa-comment':feed.hasComment,'fa-comment-o':!feed.hasComment}"></i>
+            <i *ngIf="feed.for_sale" class="float-right fa fa-shopping-cart fa-2x" routerLink="/user/order/purchase"></i>
+          </div>
+        </div>
+        <!-----------end of action ------------------------------------------------------------------>
+        <div class="row">
+          <div class="col">
+            <span>
+              <strong>
+                {{feed.likescount}}
+              </strong>
+              Likes
+            </span>
+
+            <span class="ml-2">
+              <strong>
+                {{feed.commentscount}}
+              </strong>
+              Comments
+            </span>
+
+
+
+          </div>
+        </div>
+        <!-----------end of # of likes ------------------------------------------------------------------>
+        <div class="alert alert-dark" *ngIf="feed.description">
+          {{feed.description}}
+        </div>
+        <!-----------card description ------------------------------------------------------------------>
+        <div *ngIf="feed.isAddComment" class="m-input-icon m-input-icon--left m-input-icon--right ">
+          <input [(ngModel)]="newComment " class="form-control m-input m-input--square " placeholder="comment......
+          " type="text ">
+          <span class="m-input-icon__icon m-input-icon__icon--left ">
+            <span>
+              <i class="fa fa-commenting-o "></i>
+            </span>
+          </span>
+          <span *ngIf="userPrivilegs['comments']>2" (click)="add_post_comment(feed) " class="m-input-icon__icon m-input-icon__icon--right ">
+            <span>
+              <i class="fa fa-plus-circle"></i>
+            </span>
+          </span>
+        </div>
+        <div *ngIf="feed.hasComment" class="m-widget4">
+          <div class="m-widget4__item  ng-star-inserted my-1 py-1" *ngFor="let comment of feed.comments">
+            <div class="pr-2">
+              <img alt="" class="rounded-circle" width="40" height="40" [src]="comment.profile_picture ">
+            </div>
+            <!---------------------user image ------------------------------------------------------>
+            <div class="m-widget4__info col alert alert-secondary p-1">
+              <div class="m-input-icon m-input-icon--left m-input-icon--right" *ngIf="comment.editMode">
+                <div class="input-group mb-3">
+                  <input #com [value]="comment.comment" class="p-0 form-control m-input m-input--square " placeholder="comment...." type="text ">
+                  <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" type="button" (click)="editComment(null,comment,3,feed)">
+                      <i class="fa fa-undo"></i>
+                    </button>
+                    <button  *ngIf="userPrivilegs['comments']>1" (click)="editComment(com.value,comment,2,feed)" class="btn btn-outline-success" type="button">
+                      <i class="fa fa-save"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <ng-template [ngIf]="!(comment.editMode)">
+                <strong class="m-widget4__title ">
+                  {{comment.user_name}}
+                </strong>
+                <br />
+                <span>
+                  <small>{{comment.comment}}</small>
+                  <a *ngIf="userid==comment.user_id" 
+                      (click)="editComment(null,comment,1,feed)" 
+                      class="float-right m-btn m-btn--pill m-btn--hover-brand btn btn-sm btn-secondary">
+                    <i class="fa fa-edit"></i>
+                  </a>
+                </span>
+              </ng-template>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-----------end of card body------------------------------------------------------------------>
+    </div>
+    <div class="row">
+      <div class="col">
+        <button mat-raised-button color="primary" (click)="LoadingMore()" class="btn-block" [ngClass]="{'m-loader m-loader--right m-loader--light': loading}">More</button>
+      </div>
+    </div>
+    <!-- <mat-paginator (page)="getNextPage($event)" [length]="1000" [pageSize]="6" [pageSizeOptions]="[5, 10, 25, 100]">
+    </mat-paginator> -->
+  </div>
+</div>

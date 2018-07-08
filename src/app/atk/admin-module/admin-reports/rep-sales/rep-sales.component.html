@@ -1,0 +1,125 @@
+<div class="card-header text-center text-primary">
+  <h3>Search</h3>
+</div>
+<mat-card>
+  <mat-card-content>
+    <div class="row">
+      <div class="col-4" *ngIf="userType != 'cc'">
+        <!-- <mat-form-field [style.display]="'block'">
+          <input type="text" matInput [matAutocomplete]="ccauto" [formControl]="ccField" placeholder="Select Content Ceator">
+          <mat-autocomplete #ccauto="matAutocomplete" [displayWith]="displayFn">
+            <mat-option *ngFor="let cc of ccList$ | async" [value]="cc">
+              <img alt="" class="p-1 rounded-circle" height="35" [src]="cc.profile_picture">
+              <span>{{cc?.fullName}}</span>
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field> -->
+        <mat-form-field [style.display]="'block'">
+          <mat-select placeholder="Select Content Ceator" [(ngModel)]="searchObj.cc">
+            <mat-option value="">
+              <small class="text-muted">Select Content Ceator</small>
+            </mat-option>
+            <mat-option *ngFor="let cc of ccList" [value]="cc.id"> {{cc?.fullName}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="col-2">
+        <mat-form-field [style.display]="'block'">
+          <mat-select placeholder="Type" [(ngModel)]="searchObj.type">
+            <mat-option value="poster"> Poster </mat-option>
+            <mat-option value="sub"> Sub </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="w-100">
+      </div>
+      <!-- <div class="col-2">
+        <mat-form-field [style.display]="'block'">
+          <mat-select placeholder="Date Type" [(ngModel)]="searchObj.dateRangeType">
+            <mat-option value="c_at">Created Date</mat-option>
+            <mat-option value="e_at"> End Date </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div> -->
+      <div class="col-2">
+        <mat-form-field [style.display]="'block'">
+          <mat-select placeholder="Start Month" [(ngModel)]="searchObj.startDate">
+            <mat-option *ngFor="let month of monthNames;let i=index;" [value]="i+1"> {{month}} </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="col-4">
+        <mat-form-field [style.display]="'block'">
+          <mat-select placeholder="Start Year" [(ngModel)]="searchObj.yearFrom">
+            <mat-option [value]="undefined"> none </mat-option>
+            <mat-option [value]="year" *ngFor="let year of years"> {{year}} </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="col-2">
+        <mat-form-field [style.display]="'block'">
+          <mat-select placeholder="End Month" [(ngModel)]="searchObj.endDate">
+            <mat-option *ngFor="let month of monthNames;let i=index;" [value]="i+1"> {{month}} </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="col-4">
+        <mat-form-field [style.display]="'block'">
+          <mat-select placeholder="End Year" [(ngModel)]="searchObj.yearTo">
+            <mat-option [value]="undefined"> none </mat-option>
+            <mat-option [value]="year" *ngFor="let year of years"> {{year}} </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="d-flex justify-content-center">
+      <button mat-raised-button (click)="search()" class="btn-primary">Search</button>
+    </div>
+  </mat-card-content>
+</mat-card>
+<hr />
+<mat-card>
+  <mat-card-content>
+    <div class="card">
+      <div class="body" id="chartDiv">
+        <ng-container *ngIf="single.length > 0">
+          <ngx-charts-bar-vertical [view]="view" [scheme]="colorScheme" [results]="single" [gradient]="false" [xAxis]="true" [yAxis]="true"
+            [legend]="true" [showXAxisLabel]="true" [showYAxisLabel]="true" [xAxisTickFormatting]="setXFormatting" [xAxisLabel]="'Month'"
+            [yAxisLabel]="'Value'">
+          </ngx-charts-bar-vertical>
+        </ng-container>
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>
+<hr />
+<mat-card>
+  <mat-card-content>
+    <div class="row">
+      <div class="col-2"></div>
+      <div class="col-8">
+        <table class="table table-stripedS">
+          <thead>
+            <tr>
+              <th>
+                <b>month</b>
+              </th>
+              <th>
+                <b>average amount of money</b>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <ng-container *ngIf="resultData.length>0">
+              <!-- <tr *ngFor="let row of resultData;let i=index;">
+                <td>{{row.date_trunc | date:'shortDate'}}</td>
+                <td>{{row.sum | currency}}</td>
+              </tr> -->
+            </ng-container>
+          </tbody>
+        </table>
+      </div>
+      <div class="col-2"></div>
+    </div>
+  </mat-card-content>
+</mat-card>

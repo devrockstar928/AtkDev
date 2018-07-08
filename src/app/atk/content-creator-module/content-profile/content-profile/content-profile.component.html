@@ -1,0 +1,158 @@
+<div class="row">
+  <div class="col-12 pb-2" color="accent">
+    <div class="row card-header col-md-auto">
+      <div class="col p-0 pl-1" (click)="hideshowArea('Profile')">
+        <button [color]="showvlaue=='Profile'? 'accent' :''" class="btn-block" mat-raised-button>Profile</button>
+      </div>
+      <div class="col p-0 pl-1" (click)="hideshowArea('Content')">
+        <button [color]="showvlaue=='Content'? 'accent' :''" class="btn-block" mat-raised-button>Content</button>
+      </div>
+      <div class="col p-0 pl-1" (click)="hideshowArea('Products')">
+        <button [color]="showvlaue=='Products'? 'accent' :''" class="btn-block" mat-raised-button>Products</button>
+      </div>
+      <div class="col p-0 pl-1" (click)="hideshowArea('Tiers')">
+        <button [color]="showvlaue=='Tiers'? 'accent' :''" class="btn-block" mat-raised-button>Tiers</button>
+      </div>
+      <div class="col p-0 pl-1" (click)="hideshowArea('Orders')">
+        <button [color]="showvlaue=='Orders'? 'accent' :''" class="btn-block" mat-raised-button>Orders</button>
+      </div>
+    </div>
+  </div>
+  <div class="col-8">
+    <mat-card>
+      <mat-card-content>
+        <div class="card">
+          <div class="card-header text-center bg-light">{{showvlaue}}</div>
+          <div class="card-body">
+            <div [hidden]="showvlaue!=='Profile'">
+              <app-basic-info [UserCard]="userCard"></app-basic-info>
+            </div>
+            <div [hidden]="showvlaue!=='Content'">
+              <app-posted-content></app-posted-content>
+            </div>
+            <div [hidden]="showvlaue!=='Products'">
+              <app-sku-list [ShowActions]="false"></app-sku-list>
+            </div>
+            <div [hidden]="showvlaue!=='Tiers'">
+              <app-tiers-list [ShowActions]="false"></app-tiers-list>
+            </div>
+            <div [hidden]="showvlaue!=='Orders'">
+              <app-orders-list [UserType]="userType" [ShowActions]="false"></app-orders-list>
+            </div>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+    <!----------------------basic info---------------------------------------------->
+    <!-- 
+    <mat-accordion [multi]="true">
+      <mat-expansion-panel [expanded]="true">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Creator Data
+          </mat-panel-title>
+          <mat-panel-description>
+
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+
+        <app-basic-info [UserCard]="userCard"></app-basic-info>
+
+      </mat-expansion-panel>
+      <mat-expansion-panel [expanded]="true">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Skus
+          </mat-panel-title>
+          <mat-panel-description>
+
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+
+        <app-sku-list [ShowActions]="false"></app-sku-list>
+
+      </mat-expansion-panel>
+      <mat-expansion-panel [expanded]="true">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Tiers
+          </mat-panel-title>
+          <mat-panel-description>
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <app-tiers-list [ShowActions]="false"></app-tiers-list>
+      </mat-expansion-panel>
+      <mat-expansion-panel [expanded]="true">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Orders
+          </mat-panel-title>
+          <mat-panel-description>
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <app-orders-list [UserType]="userType" [ShowActions]="false"></app-orders-list>
+      </mat-expansion-panel>
+    </mat-accordion> -->
+
+    <!--<div class="card">
+       <mat-tab-group>
+        <mat-tab label="Order History">
+        </mat-tab>
+        <mat-tab label="Subscription History">
+          <app-sub-history></app-sub-history>
+        </mat-tab>
+        <mat-tab label="Like History">
+          <app-like-history></app-like-history>
+        </mat-tab>
+        <mat-tab label="Comment History">
+          <app-comment-history></app-comment-history>
+        </mat-tab>
+        <mat-tab label="Trophies">
+          <app-trophies></app-trophies>
+        </mat-tab>
+        <mat-tab label="Level/XP">
+          <app-level-xp></app-level-xp>
+        </mat-tab>
+        <mat-tab label="tiers">
+          Twitch Facebook Twitter Instagram
+        </mat-tab>
+        <mat-tab label="content">
+
+        </mat-tab>
+      </mat-tab-group> 
+    </div>-->
+  </div>
+  <!---=------------------------end of left side eara -->
+  <div class="col-4">
+    <mat-accordion [multi]="true">
+
+      <mat-expansion-panel [expanded]="true">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Comments
+          </mat-panel-title>
+          <mat-panel-description>
+
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <app-profile-comment></app-profile-comment>
+      </mat-expansion-panel>
+      <!-------------------------------------------------------------------->
+      <mat-expansion-panel [expanded]="true">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Activities
+          </mat-panel-title>
+          <mat-panel-description>
+            User Stream
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <app-profile-stream (emitComment)="comments=$event"></app-profile-stream>
+      </mat-expansion-panel>
+      <!-------------------------------------------------------------------->
+    </mat-accordion>
+
+  </div>
+  <!---=------------------------end of right side eara -->
+
+</div>

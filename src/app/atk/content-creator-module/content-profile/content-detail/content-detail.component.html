@@ -1,0 +1,114 @@
+<mat-card>
+  <mat-card-content>
+    <div class="card">
+      <div class="card-header text-center text-white bg-primary">View Post</div>
+      <div class="card-body">
+        <!-- <div class="row">
+          <label class=""> id :</label>
+          <label class="">{{post?.id}}</label>
+        </div>
+        <hr /> -->
+        <img *ngIf="post?.post_data_type=='image'" [style.height.px]="450" [src]="post['images']" alt="" class="img-thumbnail img-fluid">
+        <video *ngIf="post?.post_data_type=='video'" #videoTag width="560" height="340" controls autoplay>
+          <source [src]="post['video_url']" type="video/mp4">
+          <!-- <source src="movie.ogg" type="video/ogg"> -->
+          Your browser does not support the video tag.
+        </video>
+        <hr />
+
+        <div class="row">
+          <b class="pl-4"> Description :</b>
+          <label class="">{{post?.description}}</label>
+        </div>
+        <hr />
+
+        <div class="row">
+          <b class="pl-4"> User :</b>
+          <label class="">{{post?.username}}</label>
+        </div>
+
+        <div class="row">
+          <b class="pl-4"> Tier Value :</b>
+          <label class="">{{post?.tier_value}}</label>
+        </div>
+
+        <div class="row">
+          <b class="pl-4"> Tier Name :</b>
+          <label class="">{{post?.tier_name}}</label>
+        </div>
+        <hr />
+
+        <!-- <div class="col-4 row">
+            <b class="col"> Type :</b>
+            <label class="">{{post?.post_data_type}}</label>
+          </div> -->
+        <hr />
+
+        <div class="row">
+          <b class="pl-4"> Comments Count :</b>
+          <label class="">{{post?.commentscount}}</label>
+        </div>
+        <div class="row">
+          <b class="pl-4"> Likes Count :</b>
+          <label class="">{{post?.likescount}}</label>
+        </div>
+
+        <div class="row">
+          <b class="pl-4"> Created Time :</b>
+          <label class="">{{post?.created_time | date:'short'}}</label>
+        </div>
+
+        <hr />
+        <div class="row">
+          <div class="col-4">
+            <label class="">
+              <mat-checkbox [disabled]="true" [checked]="post?.for_sale">For Sale</mat-checkbox>
+            </label>
+          </div>
+
+          <div class="col-4">
+            <label class="">
+              <mat-checkbox [disabled]="true" [checked]="post?.is_subscribed">Is Subscribed</mat-checkbox>
+            </label>
+          </div>
+          <div class="col-4">
+            <label class="">
+              <mat-checkbox [disabled]="true" [checked]="post?.isliked">Is Liked</mat-checkbox>
+            </label>
+          </div>
+        </div>
+
+        <hr />
+        <div class="row">
+          <div class="col-4">
+
+          </div>
+
+          <div class="col-4">
+
+          </div>
+          <div class="col-4">
+            <button *ngIf="userPrivilegs['chat_messages']>1" mat-raised-button class="btn-block" (click)="closeAndRoute($event)">Edit</button>
+          </div>
+        </div>
+        <!-- <div class="row">
+          <b class="pl-4"> tier_id :</b>
+          <label class="">{{post?.tier_id}}</label>
+        </div>
+        <hr /> -->
+
+        <!-- <div class="row">
+          <b class="pl-4"> userid :</b>
+          <label class="">{{post?.userid}}</label>
+        </div>
+        <hr /> -->
+
+        <!-- <div class="row">
+          <b class="pl-4"> video_url :</b>
+          <label class="">{{post?.video_url}}</label>
+        </div> -->
+        <hr />
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>

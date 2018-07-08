@@ -1,0 +1,76 @@
+<div class="card">
+
+  <div class="card-header text-center">
+      Product Informations
+      <button  mat-raised-button class="btn btn-outline-primary float-right" routerLink="../">
+          back to list <i class="fa fa-reply" aria-hidden="true"></i>
+        </button>
+    </div>
+<div class="card-body">
+
+
+<mat-card>
+    <mat-card-content>
+      <div class="row">
+        <div class="col">
+          <div class="row">
+            <label class="col-4 pr-0 m-0 text-secondary"> Product Type:</label>
+            <label class="text-primary">{{skuUser?.product_type}}</label>
+          </div>
+          <hr />
+          <!-----------------------------end of firstname -------------->
+          <div class="row">
+            <label class="col-4 pr-0 m-0 text-secondary"> Size :</label>
+            <label class="text-primary">{{skuUser?.size}}</label>
+          </div>
+          <hr />
+          <!-----------------------------end of lastname -------------->
+          <div class="row">
+            <label class="col-4 pr-0 m-0 text-secondary"> is_signed :</label>
+            <label class="text-primary">{{skuUser?.is_signed}}</label>
+          </div>
+          <hr />
+          <!-----------------------------end of username -------------->
+          <div class="row">
+            <label class="col-4 pr-0 m-0 text-secondary"> price :</label>
+            <label class="text-primary">{{skuUser?.price}}</label>
+          </div>
+          <hr />
+          <!-----------------------------end of username -------------->
+          <div class="row">
+            <label class="col-4 pr-0 m-0 text-secondary"> createdAt :</label>
+            <label class="text-primary">{{skuUser?.createdAt}}</label>
+          </div>
+          <hr />
+          <!-----------------------------end of username -------------->
+          <div class="row">
+            <label class="col-4 pr-0 m-0 text-secondary"> cc_id :</label>
+            <label class="text-primary">{{skuUser?.cc_id}}</label>
+          </div>
+          <hr />
+          <!-----------------------------end of username -------------->
+         
+
+          <!-----------------------------end of description -------------->
+        </div>
+        
+      </div>
+      <!------------------------------------------------------------------------------>
+      <div class="m-portlet__foot m-portlet__foot--fit">
+        <div class="m-form__actions">
+          <div class="row">
+            <div class="col-2"></div>
+            <div class="col-10">
+              <button mat-raised-button class="btn btn-outline-primary float-right" routerLink="edit">
+                Edit Product
+                <i class="fa fa-edit" aria-hidden="true"></i>
+              </button>
+            </div>
+          </div>   
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>
+</div>
+  

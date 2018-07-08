@@ -1,0 +1,148 @@
+<form enctype="multipart/form-data" id="formid" #postForm="ngForm">
+  <mat-card>
+    <mat-card-content>
+      <div class="row">
+        <!-- <div class="col-6" *ngIf="userType == 'admin'">
+          <div class="form-group">
+            <label>Content Creators</label>
+            <span class="ui-fluid">
+              <p-autoComplete [suggestions]="filtered" 
+              (completeMethod)="filterCountryMultiple($event)" 
+              styleClass="wid100" [minLength]="1"
+                placeholder="Content Creator" 
+                name="creators" 
+                field="fullname" [multiple]="true" [(ngModel)]="selectedContentCreator">
+              </p-autoComplete>
+            </span>
+          </div>
+        </div> -->
+        <!-- [disabled]="userType == 'admin' && selectedContentCreator.length ==0" -->
+        <div class="col-6">
+          <div class="form-group">
+            <label>Tiers</label>
+            <select  class="form-control" placeholder="" [(ngModel)]="postContent.tierid"
+              name="tierid">
+              <option [value]="tier.id" *ngFor="let tier of tiresValues">{{tier.tier_name}}</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <!------------------------------------------------------------------>
+    </mat-card-content>
+    <mat-card-content>
+      <mat-tab-group (focusChange)="tabChange($event)">
+        <!-------------------------------------------------------------------------->
+        <mat-tab label="Text">
+          <div class="row p-4">
+            <div class="row"> 
+              <div class="col">
+                  <div [froalaEditor]  [(froalaModel)]="textPostValue"></div>
+              </div>
+            </div>
+          </div>
+          Post Thumbnail
+          <div class="row p-4">
+            <div class="col">
+              <div class="row">
+                <label type="button" class="btn btn-primary">
+                  <input type="file" name="postThumb" accept="image/*" #postThumbFile (change)="postThumbChangeEvent($event)" />
+                </label>
+              </div>
+            </div>
+            <div class="col" [hidden]="!selectPostThumb">
+              <img crossorigin [src]="selectPostThumb" alt="your image" width="64" height="64" />
+            </div>
+          </div>
+          <div class="row p-4">
+            <div class="col">
+                Subject : <input type="text" placeholder="Subject..." name="text_subject" [(ngModel)]="text_subject" [style.width]="'50%'">
+            </div>
+          </div>
+          <div class="row p-4">
+            <div class="col">
+                Add Video Link : <input type="text" placeholder="Video link..." name="video_link" [(ngModel)]="video_link" [style.width]="'50%'">
+            </div>
+          </div>
+        </mat-tab>
+        <!-------------------------------------------------------------------------->
+        <mat-tab label="Image">
+          <div class="row p-4">
+            <div class="col-4">
+              <div class="row">
+                <label type="button" class="btn btn-primary">
+                  <input type="file" name="userPhoto" accept="image/*" #imageFile (change)="fileChangeEvent($event)" />
+                </label>
+              </div>
+            </div>
+            <div class="col-8">
+              <div class="row"> 
+                <div class="col">
+                  <div [froalaEditor] [(froalaModel)]="imagedescription"></div>
+                </div>
+              </div>
+              <br />
+            </div>
+          </div>
+          <div class="col border border-dark" [hidden]="!selectPhoto">
+            <img crossorigin [src]="selectPhoto" alt="your image" width="560" height="340" />
+          </div>
+          <div class="row p-4">
+            <div class="col">
+                Subject : <input type="text" placeholder="Subject..." name="image_subject" [(ngModel)]="image_subject" [style.width]="'50%'">
+            </div>
+          </div>
+        </mat-tab>
+        <!-------------------------------------------------------------------------->
+        <mat-tab label="Video">
+          <div class="row p-4">
+            <div class="col-4">
+              <div class="row">
+                <label type="button" class="btn btn-primary">
+                    <input type="file" name="userPhoto" #videoFile accept="video/*" (change)="videoChangeEvent($event,videoTag)"/>
+                </label>
+              </div>
+            </div>
+            <div class="col-8">
+              <div class="row"> 
+                <div class="col">
+                  <div [froalaEditor] [(froalaModel)]="videodescription"></div>
+                </div>
+              </div>
+              <br />
+            </div>
+          </div>
+          <div class="row p-4">
+            <div class="col">
+                Subject : <input type="text" placeholder="Subject..." name="video_subject" [(ngModel)]="video_subject" [style.width]="'50%'">
+            </div>
+          </div>
+          <div class="col border border-dark" [hidden]="!selectVideo">
+            <video #videoTag width="560" height="340" controls autoplay>
+              <source [src]="selectVideo" type="video/mp4">
+              <!-- <source src="movie.ogg" type="video/ogg"> -->
+              Your browser does not support the video tag.
+            </video>
+          </div>
+          Video Thumbnail
+          <div class="row p-4">
+            <div class="col">
+              <div class="row">
+                <label type="button" class="btn btn-primary">
+                  <input type="file" name="videoThumb" accept="image/*" #videoThumbFile (change)="videoThumbChangeEvent($event)" />
+                </label>
+              </div>
+            </div>
+            <div class="col" [hidden]="!selectVideoThumb">
+              <img crossorigin [src]="selectVideoThumb" alt="your image" width="64" height="64" />
+            </div>
+          </div>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-card-content>
+    <mat-card-content>
+      <div class="row p-4 justify-content-md-center">
+        <button mat-raised-button class="col-2 offset-5" (click)="save(postForm)">Save Post</button>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</form>

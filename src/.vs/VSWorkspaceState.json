@@ -1,0 +1,12 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\app",
+    "\\app\\atk\\admin-module",
+    "\\app\\atk\\admin-module\\content-creator-manager-table",
+    "\\app\\primeng",
+    "\\app\\primeng\\datatable"
+  ],
+  "SelectedNode": "\\app\\primeng\\datatable\\datatable.ts",
+  "PreviewInSolutionExplorer": false
+}

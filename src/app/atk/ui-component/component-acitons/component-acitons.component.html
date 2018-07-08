@@ -1,0 +1,10 @@
+<button mat-button [matMenuTriggerFor]="menu">
+  <i class="fa fa-ellipsis-v"></i>
+</button>
+<mat-menu #menu="matMenu">
+  <ng-container *ngFor="let btn of actionsButton">
+  <button *ngIf="btn.isHavePrivilege" mat-menu-item [ngClass]="btn.class" (click)="onClick(btn.value)">
+      <i class="fa fa-{{btn.icon}}"></i> {{btn.text}}</button>
+  </ng-container>
+
+</mat-menu>

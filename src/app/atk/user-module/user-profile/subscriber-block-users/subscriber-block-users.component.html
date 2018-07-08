@@ -1,0 +1,17 @@
+    <div class="row align-items-center" *ngFor="let user of contacts">
+      <div [style.cursor]="'pointer'" class="col-7 row bg-light mx-3 my-2" [ngClass]="{'bg-info text-white':currentContact==user,'bg-light':currentContact!=user}">
+        <img alt="" class="p-1 rounded-circle" width="40" height="40" [src]="user.profile_picture">
+        <!-- <img class="p-1 rounded" [src]="user.profile_picture" alt="" [style.width.%]="15" [style.height.%]="15"> -->
+        <div class="align-self-center">
+          <span class="mt-0">{{user.id}} {{user.user_name}}</span>
+        </div>
+      </div>
+      <div class="col">
+        <div class="align-self-center mx-2">
+          <span *ngIf="user.is_blocked">Blocked</span>
+          <span *ngIf="!user.is_blocked">Unblocked</span>
+          <!-- <mat-slide-toggle (change)="changeBlockUser(user)" [checked]="!user.is_blocked && !user.is_blocking_me">
+          </mat-slide-toggle> -->
+        </div>
+      </div>
+    </div>

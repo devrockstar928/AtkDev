@@ -1,0 +1,68 @@
+<mat-card>
+  <mat-card-content>
+    <div class="row">
+      <div class="col-11">
+        <mat-form-field [style.display]="'block'">
+          <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+        </mat-form-field>
+      </div>
+    </div>
+    <mat-table [dataSource]="dataSource" matSort>
+
+      <!-- ID Column -->
+      <ng-container matColumnDef="id">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> ID </mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.id}} </mat-cell>
+      </ng-container>
+
+      <!-- Progress Column -->
+      <ng-container matColumnDef="ccName">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Content Creator </mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.contentCreator_data?.first_name}} {{row.contentCreator_data?.last_name}}</mat-cell>
+      </ng-container>
+
+      <!-- Name Column -->
+      <ng-container matColumnDef="senderName">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Sender </mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.sender_data?.first_name}} {{row.sender_data?.last_name}} </mat-cell>
+      </ng-container>
+
+      <!-- Color Column -->
+      <ng-container matColumnDef="message">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Message </mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.message}} </mat-cell>
+      </ng-container>
+
+      <!-- Color Column -->
+      <ng-container matColumnDef="reason">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Reason </mat-header-cell>
+        <mat-cell *matCellDef="let row">
+          <div class="row">
+            <div class="col">{{row.reason}}</div>
+          </div>
+        </mat-cell>
+      </ng-container>
+
+      <!-- Color Column -->
+      <ng-container matColumnDef="createdAt">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Created Date </mat-header-cell>
+        <mat-cell *matCellDef="let row">{{row.createdAt | date:'shortDate'}}</mat-cell>
+      </ng-container>
+
+      <!-- Color Column -->
+      <ng-container matColumnDef="updatedAt">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Updated Date </mat-header-cell>
+        <mat-cell *matCellDef="let row">{{row.updatedAt | date:'shortDate'}}</mat-cell>
+      </ng-container>
+
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;">
+      </mat-row>
+    </mat-table>
+    <mat-paginator (page)="paginate($event)"
+                    [length]="tickets.length+1"
+                    [pageSize]="8">
+    </mat-paginator>
+  </mat-card-content>
+</mat-card>

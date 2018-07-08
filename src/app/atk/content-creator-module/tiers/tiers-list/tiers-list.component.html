@@ -1,0 +1,89 @@
+<mat-card>
+  <mat-card-content>
+
+ 
+<div class="row">
+  <div class="col-9">
+    <mat-form-field [style.display]="'block'">
+      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+    </mat-form-field>
+  </div>
+  <div class="col align-self-center" *ngIf="ShowActions">
+
+    <div class="col align-self-center" *ngIf="ShowActions">
+      <button *ngIf="userPrivilegs['tiers']>2" (click)="addTier()" mat-raised-button class="btn btn-outline-primary float-right">
+        Add New Tier
+        <i class="fa fa-plus" aria-hidden="true"></i>
+      </button>
+    </div>
+    <!-- <app-add-button-actions privilegeValue="tiers" class="float-right" (click)="addTier()" text="Add New Tier"></app-add-button-actions> -->
+  </div>
+</div>
+
+<div class="example-container mat-elevation-z8">
+
+  <mat-table [dataSource]="dataSource" matSort>
+
+    <!-- ID Column -->
+    <ng-container matColumnDef="id">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> ID </mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.id}} </mat-cell>
+    </ng-container>
+
+    <!-- Progress Column -->
+    <ng-container matColumnDef="tier_name">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Tier Name </mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.tier_name}} </mat-cell>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="tier_value">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Tier Value </mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.tier_value}} </mat-cell>
+    </ng-container>
+
+    <!-- Color Column -->
+    <!-- <ng-container matColumnDef="plan_id">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Plan Id </mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.plan_id}} </mat-cell>
+    </ng-container> -->
+
+    <!-- Color Column -->
+    <ng-container matColumnDef="issubscribed">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Is Subscribed </mat-header-cell>
+      <mat-cell *matCellDef="let row">
+        <mat-checkbox [checked]="row.issubscribed" disabled="disabled">
+        </mat-checkbox>
+      </mat-cell>
+    </ng-container>
+    <!-- actions Column -->
+    <ng-container matColumnDef="actions" *ngIf="ShowActions">
+      <mat-header-cell *matHeaderCellDef> Actions </mat-header-cell>
+      <mat-cell *matCellDef="let row">
+        <!-- <app-component-acitons 
+        [actions]="[2,4]" 
+        [privilegeValue]="'tiers'"
+        (click)="componentAction($event,row)"></app-component-acitons> -->
+        <button mat-button [matMenuTriggerFor]="menu">
+          <i class="fa fa-ellipsis-v"></i>
+        </button>
+        <mat-menu #menu="matMenu">
+          <button *ngIf="userPrivilegs['tiers']>1" mat-menu-item class="text-warning" (click)="editTier(row)">
+            <i class="fa fa-edit"></i> Edit</button>
+          <button *ngIf="userPrivilegs['tiers']>3" mat-menu-item class="text-danger" (click)="deleteTier(row)">
+            <i class="fa fa-trash"></i> Remove</button>
+        </mat-menu>
+      </mat-cell>
+    </ng-container>
+
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;">
+    </mat-row>
+  </mat-table>
+
+  <mat-paginator #paginator [length]="100" [pageSize]="5" [pageSizeOptions]="[5, 10, 25, 50]">
+  </mat-paginator>
+</div>
+</mat-card-content>
+</mat-card> 

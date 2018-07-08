@@ -1,0 +1,39 @@
+next task
+
+{{atk}}/contentcreator/subscribers
+
+mars [10:37 PM]
+http://localhost:4200/creator/users/profile/list 
+change this to return the data from {{atk}}/contentcreator/subscribers?id=105
+
+only have one orders page for cc - http://localhost:4200/creator/orders
+
+http://localhost:4200/creator/products allow users to add Skus here
+
+
+http://localhost:4200/creator/products allow users to add Skus here
+
+the view order doesnt work here - http://localhost:4200/creator/orders
+
+mars [10:38 PM]
+only have one orders page for cc - http://localhost:4200/creator/orders
+allow the cc to edit users
+
+
+Abdullah Sheta [10:38 PM]
+or you want just list for this
+
+mars [10:38 PM]
+remove the seconds completely
+http://localhost:4200/creator/products allow users to add Skus here
+the view order doesnt work here - http://localhost:4200/creator/orders
+
+
+this also has the comments api
+
+in the profile
+POST {{atk}}/user/profile_comment
+can we please discuss tomorrow when we are going to finish
+we are 2 weeks behind now
+there are only a couple of apis missing, but we still have stuff we can finish on the frontend
+

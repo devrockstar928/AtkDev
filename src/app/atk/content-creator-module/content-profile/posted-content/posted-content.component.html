@@ -1,0 +1,30 @@
+<div class="row text-center">
+  <div class="col-4 p-0" *ngFor="let post of posts" (click)="showPost(post)" data-toggle="modal" data-target="#postdetail">
+    <img [src]="post['images']" alt="" class="img-thumbnail img-fluid">
+  </div>
+</div>
+<div class="row justify-content-center">
+  <div class="col-4">
+    <button mat-raised-button color="primary" (click)="loadMoreContent()" class="btn-block" [ngClass]="{'m-loader m-loader--right m-loader--light': loading}">Load More Posts</button>
+  </div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="postdetail" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+  <div class=" modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <!-- <div class="modal-header"> -->
+      <!-- <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5> -->
+      <button [hidden]="true" type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+      <!-- </div> -->
+      <!-- <div class="modal-body"> -->
+      <app-content-detail (onCloseAndRoute)="onCloseAndRoute($event)" [Post]="showedPost"></app-content-detail>
+      <!-- </div> -->
+      <!-- <div class="modal-footer">
+      </div> -->
+    </div>
+  </div>
+</div>

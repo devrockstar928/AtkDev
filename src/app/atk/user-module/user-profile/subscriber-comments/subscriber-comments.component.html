@@ -1,0 +1,38 @@
+<div class="card">
+    <div class="card-header bg-light text-center">
+      Add Comment
+    </div>
+    <div class="card-body">
+      <textarea rows="2" cols="30" [(ngModel)]="newComment" class="form-control" name="description" placeholder="">
+      </textarea>
+      <button mat-raised-button class="btn btn-outline-primary btn-sm" (click)="addNewComment()">Add</button>
+      <!-- <h5><small>Comments: </small></h5>
+      <h6 *ngFor="let comment of comments"><small>{{comment}}</small> </h6> -->
+  
+      <div class="m-list-timeline">
+        <div class="m-list-timeline__group">
+          <div class="m-list-timeline__heading">
+            <small>Comments: </small>
+          </div>
+          <div class="m-list-timeline__items">
+            <div class="m-list-timeline__item" *ngFor="let comment of comments">
+              <span class="m-list-timeline__badge m-list-timeline__badge--state-success"></span>
+              <a href="" class="m-list-timeline__text">
+                <small>{{comment.comment}}</small>
+              </a>
+              <span class="m-list-timeline__time">
+                <small>{{comment.created_at | date:'short'}}</small>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+          <div class="col">
+            <button mat-raised-button color="primary" (click)="LoadingMore()" class="btn-sm btn-block" 
+            [ngClass]="{'m-loader m-loader--right m-loader--light': loading}">More</button>
+          </div>
+        </div>
+    </div>
+  </div>
+  

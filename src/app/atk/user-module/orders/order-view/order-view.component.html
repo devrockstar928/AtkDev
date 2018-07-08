@@ -1,0 +1,118 @@
+<div class="card">
+  <div class="card-header text-center">
+    View Order
+    <button mat-raised-button class="btn btn-outline-primary float-right" (click)="backToList()">
+      back to list
+      <i class="fa fa-reply" aria-hidden="true"></i>
+    </button>
+  </div>
+  <div class="card-body">
+    <img class="card-img-top" [src]="order?.content_link" alt="Card image cap">
+
+    <!-----------------------------end of username -------------->
+    <!-- <div class="row">
+      <b class="pl-4"> id :</b>
+      <label class="">{{order?.id}}</label>
+    </div>
+    <hr /> -->
+
+    <!-----------------------------end of username -------------->
+    <div class="row"> 
+      <b class="pl-4"> Content Creator</b>
+      <label class=""> {{order?.cc_id}}</label>
+    </div>
+    <hr />
+
+    <!-----------------------------end of username -------------->
+    <div class="row">
+      <b class="pl-4"> Content Link</b>
+      <label class="">{{order?.content_link}}</label>
+    </div>
+    <hr />
+
+    <!-----------------------------end of username -------------->
+    <div class="row">
+      <b class="pl-4"> Order Date</b>
+      <label class=""> {{order?.order_date | date:'short'}}</label>
+    </div>
+    <hr />
+
+    <!-----------------------------end of username -------------->
+    <div class="row">
+      <b class="pl-4"> Payment Date</b>
+      <label class=""> {{order?.payment_date | date:'short'}}</label>
+    </div>
+    <hr />
+
+    <!-----------------------------end of username -------------->
+    <div class="row">
+      <b class="pl-4"> Shipping Date</b>
+      <label class=""> {{order?.shipping_date | date:'short'}}</label>
+    </div>
+    <hr />
+
+
+    <!-----------------------------end of username -------------->
+    <div class="row">
+      <b class="pl-4"> Shipping Status</b>
+      <label class=""> {{order?.shipping_status}}</label>
+    </div>
+    <hr />
+    <!-----------------------------end of username -------------->
+    <div class="row">
+      <b class="pl-4"> Price :</b>
+      <label class="">{{order?.price | currency}}</label>
+    </div>
+    <hr />
+    <!-----------------------------end of username -------------->
+    <div class="row">
+      <b class="pl-4"> Tracking Number</b>
+      <label class="">{{order?.tracking_number}}</label>
+    </div>
+    <hr />
+    <!-----------------------------end of username -------------->
+    <div class="row">
+      <b class="pl-4"> Shipping Adddress</b>
+      <label class="">{{order?.shipping_adddress}}</label>
+    </div>
+    <hr />
+    <!-----------------------------end of username -------------->
+    <div class="row">
+      <b class="pl-4"> billing_address</b>
+      <label class=""> {{order?.billing_address}}</label>
+    </div>
+    <hr />
+    <!-----------------------------end of username -------------->
+    <div class="row">
+      <b class="pl-4"> Poster Size</b>
+      <label class=""> {{order?.poster_size}}</label>
+    </div>
+    <hr />
+    <!-----------------------------end of username -------------->
+    <div class="row">
+      <b class="pl-4"> Poster Signed</b>
+      <label class=""> {{order?.poster_signed}}</label>
+    </div>
+    <hr />
+    <!-----------------------------end of username -------------->
+    <div class="row">
+      <b class="pl-4"> Payment Status</b>
+      <label class=""> {{order?.payment_status}}</label>
+    </div>
+    <hr />
+    <!------------------------------------------------------------------------------>
+    <div class="m-portlet__foot m-portlet__foot--fit">
+        <div class="m-form__actions">
+          <div class="row">
+            <div class="col-7"></div>
+            <div class="col-4">
+              <button mat-raised-button class="btn-block btn btn-outline-primary float-right" (click)="editOrder()">
+                Edit Order
+                <i class="fa fa-edit" aria-hidden="true"></i>
+              </button>
+            </div>
+          </div>   
+        </div>
+      </div>
+  </div>
+</div>

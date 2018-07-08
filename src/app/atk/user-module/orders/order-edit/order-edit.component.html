@@ -1,0 +1,99 @@
+
+<div class="card">
+  <div class="card-header text-center">
+    Order Edit
+    <button mat-raised-button class="btn btn-outline-primary float-right" routerLink="../../">
+      back to list
+      <i class="fa fa-reply" aria-hidden="true"></i>
+    </button>
+  </div>
+  <div class="card-body">
+    <form class="m-form m-form--fit m-form--label-align-right" [formGroup]="orderForm" novalidate>
+
+      <!-- <mat-form-field class="mx-4" [style.display]="'block'">
+        <input matInput placeholder="Product Type" [ngClass]="{'is-valid': orderForm.get('product_type').valid , 'is-invalid': orderForm.get('product_type').invalid }"
+          formControlName="product_type">
+      </mat-form-field> -->
+
+      <!---------------------------------------------------------------------------------------------------------------------------->
+      <mat-form-field class="mx-4" [style.display]="'block'">
+        <input matInput formControlName="order_date" [matDatepicker]="orderdate"  (focus)="orderdate.open()" placeholder="Choose order date">
+        <mat-datepicker-toggle matSuffix [for]="orderdate"></mat-datepicker-toggle>
+        <mat-datepicker  touchUi="true" #orderdate></mat-datepicker>
+      </mat-form-field>
+      <!---------------------------------------------------------------------------------------------------------------------------->
+      <mat-form-field class="mx-4" [style.display]="'block'">
+        <input matInput formControlName="payment_date" [matDatepicker]="payment_date" (focus)="orderdate.open()" placeholder="Choose payment date">
+        <mat-datepicker-toggle matSuffix [for]="payment_date"></mat-datepicker-toggle>
+        <mat-datepicker  touchUi="true" #payment_date></mat-datepicker>
+      </mat-form-field>
+      <!---------------------------------------------------------------------------------------------------------------------------->
+      <mat-form-field class="mx-4" [style.display]="'block'">
+        <input matInput formControlName="shipping_date" [matDatepicker]="picker" (focus)="orderdate.open()" placeholder="Choose a date">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker  touchUi="true" #picker></mat-datepicker>
+      </mat-form-field>
+
+      <!---------------------------------------------------------------------------------------------------------------------------->
+      <mat-form-field class="mx-4" [style.display]="'block'">
+        <input matInput placeholder="shipping_status" [ngClass]="{'is-valid': orderForm.get('shipping_status').valid , 'is-invalid': orderForm.get('shipping_status').invalid }"
+          formControlName="shipping_status">
+      </mat-form-field>
+      <!---------------------------------------------------------------------------------------------------------------------------->
+      <mat-form-field class="mx-4" [style.display]="'block'">
+          <input matInput placeholder="tracking_number" [ngClass]="{'is-valid': orderForm.get('tracking_number').valid , 'is-invalid': orderForm.get('tracking_number').invalid }"
+            formControlName="tracking_number">
+        </mat-form-field>
+              <!---------------------------------------------------------------------------------------------------------------------------->
+      <mat-form-field class="mx-4" [style.display]="'block'">
+          <input matInput placeholder="shipping_address" [ngClass]="{'is-valid': orderForm.get('shipping_address').valid , 'is-invalid': orderForm.get('shipping_address').invalid }"
+            formControlName="shipping_address">
+        </mat-form-field>
+              <!---------------------------------------------------------------------------------------------------------------------------->
+      <mat-form-field class="mx-4" [style.display]="'block'">
+          <input matInput placeholder="billing_address" [ngClass]="{'is-valid': orderForm.get('billing_address').valid , 'is-invalid': orderForm.get('billing_address').invalid }"
+            formControlName="billing_address">
+        </mat-form-field>
+                      <!---------------------------------------------------------------------------------------------------------------------------->
+      <mat-form-field class="mx-4" [style.display]="'block'">
+          <input matInput placeholder="price" [ngClass]="{'is-valid': orderForm.get('price').valid , 'is-invalid': orderForm.get('price').invalid }"
+            formControlName="price">
+          <span matPrefix class="mx-1">$</span>
+        </mat-form-field>
+                      <!---------------------------------------------------------------------------------------------------------------------------->
+      <mat-form-field class="mx-4" [style.display]="'block'">
+          <input matInput placeholder="poster_size" [ngClass]="{'is-valid': orderForm.get('poster_size').valid , 'is-invalid': orderForm.get('poster_size').invalid }"
+            formControlName="poster_size">
+        </mat-form-field>
+                      <!---------------------------------------------------------------------------------------------------------------------------->
+        <mat-checkbox  class="mx-4" formControlName="poster_signed">Is Signed</mat-checkbox> 
+        
+                      <!---------------------------------------------------------------------------------------------------------------------------->
+      <mat-form-field class="mx-4" [style.display]="'block'">
+          <input matInput placeholder="payment_status" [ngClass]="{'is-valid': orderForm.get('payment_status').valid , 'is-invalid': orderForm.get('payment_status').invalid }"
+            formControlName="payment_status">
+        </mat-form-field>
+      <!---------------------------------------------------------------------------------------------------------------------------->
+      <!-- <mat-checkbox class="mx-4" formControlName="is_signed">Is Signed</mat-checkbox> -->
+
+      <!---------------------------------------------------------------------------------------------------------------------------->
+
+
+      <div class="m-portlet__foot m-portlet__no-border m-portlet__foot--fit">
+        <div class="m-form__actions m-form__actions--solid">
+          <div class="row">
+            <div class="col-lg-2"></div>
+            <div class="col-lg-10">
+              <button mat-raised-button color="primary" class="btn btn-success" [disabled]="orderForm.invalid" (click)="AddNewOrder()">
+                Save
+              </button>
+              <button mat-raised-button class="btn btn-outline-secondary" routerLink="../">
+                Cancel
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

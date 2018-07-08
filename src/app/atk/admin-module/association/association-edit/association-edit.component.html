@@ -1,0 +1,233 @@
+<div class="card">
+  <div class="card-header text-center">
+          <button [hidden]="currentMode==1" mat-raised-button class="btn btn-outline-primary float-left" (click)="reset()" routerLink="/admin/association/0/edit">
+            Add New
+            <i class="fa fa-plus" aria-hidden="true"></i>
+          </button>
+    Association Informations
+    <button mat-raised-button class="btn btn-primary float-right" routerLink="/admin/association/all">
+      back to list
+      <i class="fa fa-reply" aria-hidden="true"></i>
+    </button>
+  </div>
+  <!-------------------------------------------------------------------->
+  <div class="body">
+    <mat-card>
+      <mat-card-content>
+        <form [formGroup]="associationForm" novalidate>
+          <div class="row" *ngIf="currentMode==1">
+            <div class="col">
+              <mat-form-field [style.display]="'block'">
+                <input type="text" matInput [matAutocomplete]="ccauto" formControlName="cc_users" placeholder="Select Content Ceator">
+                <mat-autocomplete #ccauto="matAutocomplete" [displayWith]="displayFn">
+                  <mat-option *ngFor="let cc of ccList$ | async" [value]="cc">
+                    <img alt="" class="p-1 rounded-circle" height="35" [src]="cc.profile_picture">
+                    <span>{{cc?.fullName}}</span>
+                  </mat-option>
+                </mat-autocomplete>
+                <mat-error *ngIf="associationForm.get('cc_users').hasError('required') ">Content Creator Required</mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col">
+              <mat-form-field [style.display]="'block'" [style.display]="'block'">
+                <input #ccmInput matInput [matAutocomplete]="ccmauto" formControlName="ccm_users" placeholder="Select Content Ceator Manager">
+                <mat-autocomplete #ccmauto="matAutocomplete" [displayWith]="displayFn">
+                  <mat-option *ngFor="let ccm of ccmList$ | async" [value]="ccm">
+                    <img alt="" class="p-1 rounded-circle" height="35" [src]="ccm.profile_picture">
+                    <span>{{ccm?.fullName}}</span>
+                  </mat-option>
+                </mat-autocomplete>
+                <mat-error *ngIf="associationForm.get('ccm_users').hasError('required') ">Content Creator Manager Required</mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+
+          <div class="row" *ngIf="currentMode==2">
+            <div class="col-5">
+              <span class="mr-2 text-secondary">Content Creator : </span>
+              <b class="mr-2 text-primary">{{currentObject?.cc_users?.first_name}} {{currentObject?.cc_users?.last_name}}</b>
+            </div>
+            <div class="col">
+              <span class="mr-2 text-secondary">Content Creator Manager : </span>
+              <b class="mr-2 text-primary">{{currentObject?.ccm_users?.first_name}} {{currentObject?.ccm_users?.last_name}}</b>
+            </div>
+          </div>
+          <hr />
+          <div class="car-header text-center">
+            <!-- <button [ngClass]="{'bg-primary text-white':!isAddPrivilege}" [hidden]="isAddPrivilege" mat-raised-button (click)="isAddPrivilege=true;">Add Privilege</button> -->
+            <!-- <button [ngClass]="{'bg-light':isAddPrivilege}" [hidden]="!isAddPrivilege  || currentMode==2" mat-raised-button (click)="isAddPrivilege=false;">No Privilege</button> -->
+            <h3 class="mt-3"> Permissions</h3>
+          </div>
+          <hr />
+          <!------------------------------------------------------------------------------------------------------>
+            <div class="row">
+              <div class=" col-5 ">
+                <!--  posts -->
+                <div class="form-group ">
+                  <b class="text-muted " for=" ">Posts</b>
+                  <mat-form-field [style.display]=" 'block' ">
+                    <mat-select placeholder="Posts " formControlName="posts">
+                      <mat-option>--</mat-option>
+                      <mat-option *ngFor="let type of privilege_types " [value]="type.value ">
+                        <span [class]="getTextColor(type.value) ">{{type.key}}</span>
+                      </mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="associationForm.get('posts').hasError('required') ">Post Permission Required</mat-error>
+                    <!-- <mat-hint>{{"associationForm.get( 'like').value?.sound}}</mat-hint> -->
+                  </mat-form-field>
+                </div>
+                <!--  comment -->
+                <div class="form-group">
+                  <b class="text-muted" for="">Comments</b>
+                  <mat-form-field [style.display]="'block'">
+                    <mat-select placeholder="Comments" formControlName="comments">
+                      <mat-option>--</mat-option>
+                      <mat-option *ngFor="let type of privilege_types" [value]="type.value">
+                        <span [class]="getTextColor(type.value)">{{type.key}}</span>
+                      </mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="associationForm.get('comments').hasError('required')">Comment Permission Required</mat-error>
+                    <!-- <mat-hint>{{"associationForm.get('like').value?.sound}}</mat-hint> -->
+                  </mat-form-field>
+                </div>
+                <!--  like -->
+                <div class="form-group">
+                  <b for="" class="text-muted">Likes</b>
+                  <mat-form-field [style.display]="'block'">
+                    <mat-select placeholder="Likes" formControlName="likes">
+                      <mat-option>--</mat-option>
+                      <mat-option *ngFor="let type of privilege_types" [value]="type.value">
+                        <span [class]="getTextColor(type.value)">{{type.key}}</span>
+                      </mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="associationForm.get('likes').hasError('required')">Like Permission Required</mat-error>
+                    <!-- <mat-hint>{{"associationForm.get('like').value?.sound}}</mat-hint> -->
+                  </mat-form-field>
+                </div>
+                <!--  tiers -->
+                <div class="form-group">
+                  <b for="" class="text-muted">Tiers</b>
+                  <mat-form-field [style.display]="'block'">
+                    <mat-select placeholder="Tiers" formControlName="tiers">
+                      <mat-option>--</mat-option>
+                      <mat-option *ngFor="let type of privilege_types" [value]="type.value">
+                        <span [class]="getTextColor(type.value)">{{type.key}}</span>
+                      </mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="associationForm.get('tiers').hasError('required')">Tiers Permission Required</mat-error>
+                    <!-- <mat-hint>{{"associationForm.get('like').value?.sound}}</mat-hint> -->
+                  </mat-form-field>
+                </div>
+                
+                <!--  skus -->
+                <div class="form-group">
+                  <b for="" class="text-muted">Skus</b>
+                  <mat-form-field [style.display]="'block'">
+                    <mat-select placeholder="skus" formControlName="skus">
+                      <mat-option>--</mat-option>
+                      <mat-option *ngFor="let type of privilege_types" [value]="type.value">
+                        <span [class]="getTextColor(type.value)">{{type.key}}</span>
+                      </mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="associationForm.get('skus').hasError('required')">Skus Permission Required</mat-error>
+                    <!-- <mat-hint>{{"associationForm.get('like').value?.sound}}</mat-hint> -->
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="col-7">
+                <!--  Orders -->
+                <div class="form-group">
+                    <b for="" class="text-muted">Orders</b>
+                    <mat-form-field [style.display]="'block'">
+                      <mat-select placeholder="orders" formControlName="orders">
+                        <mat-option>--</mat-option>
+                        <mat-option *ngFor="let type of privilege_types" [value]="type.value">
+                          <span [class]="getTextColor(type.value)">{{type.key}}</span>
+                        </mat-option>
+                      </mat-select>
+                      <mat-error *ngIf="associationForm.get('orders').hasError('required')">Orders Permission Required</mat-error>
+                      <!-- <mat-hint>{{"associationForm.get('like').value?.sound}}</mat-hint> -->
+                    </mat-form-field>
+                  </div>
+                <!--  block_users -->
+                <div class="form-group">
+                  <b for="" class="text-muted">Reports</b>
+                  <mat-form-field [style.display]="'block'">
+                    <mat-select placeholder="reports" formControlName="reports">
+                      <mat-option>--</mat-option>
+                      <mat-option *ngFor="let type of privilege_types" [value]="type.value">
+                        <span [class]="getTextColor(type.value)">{{type.key}}</span>
+                      </mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="associationForm.get('reports').hasError('required')">Reports Permission Required</mat-error>
+                    <!-- <mat-hint>{{"associationForm.get('like').value?.sound}}</mat-hint> -->
+                  </mat-form-field>
+                </div>
+                <!--  get_subscribers -->
+                <div class="form-group">
+                  <b for="" class="text-muted">Get Subscribers</b>
+                  <mat-form-field [style.display]="'block'">
+                    <mat-select placeholder="get_subscribers" formControlName="get_subscribers">
+                      <mat-option>--</mat-option>
+                      <mat-option *ngFor="let type of privilege_types" [value]="type.value">
+                        <span [class]="getTextColor(type.value)">{{type.key}}</span>
+                      </mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="associationForm.get('get_subscribers').hasError('required')">Get Subscribers Permission Required</mat-error>
+                    <!-- <mat-hint>{{"associationForm.get('like').value?.sound}}</mat-hint> -->
+                  </mat-form-field>
+                </div>
+                <!--  block_users -->
+                <div class="form-group">
+                  <b for="" class="text-muted">Block Users</b>
+                  <mat-form-field [style.display]="'block'">
+                    <mat-select placeholder="block_users" formControlName="block_users">
+                      <mat-option>--</mat-option>
+                      <mat-option *ngFor="let type of privilege_types" [value]="type.value">
+                        <span [class]="getTextColor(type.value)">{{type.key}}</span>
+                      </mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="associationForm.get('block_users').hasError('required')">Block Users Permission Required</mat-error>
+                    <!-- <mat-hint>{{"associationForm.get('like').value?.sound}}</mat-hint> -->
+                  </mat-form-field>
+                </div>
+                <!--  chat_messages -->
+                <div class="form-group">
+                  <b for="" class="text-muted">Chat Messages</b>
+                  <mat-form-field [style.display]="'block'">
+                    <mat-select placeholder="chat_messages" formControlName="chat_messages">
+                      <mat-option>--</mat-option>
+                      <mat-option *ngFor="let type of privilege_types" [value]="type.value">
+                        <span [class]="getTextColor(type.value)">{{type.key}}</span>
+                      </mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="associationForm.get('chat_messages').hasError('required')">Chat Messages Permission Required</mat-error>
+                    <!-- <mat-hint>{{"associationForm.get('like').value?.sound}}</mat-hint> -->
+                  </mat-form-field>
+                </div>
+
+              </div>
+            </div>
+
+          <div class="row my-3">
+            <div class="col-3 offset-3">
+              <button mat-raised-button class="btn-success  btn-block" (click)="saveAssociation($event)">
+                Save
+                <i class="fa fa-save" aria-hidden="true"></i>
+              </button>
+            </div>
+            <!-- <div class="col-3">
+              <button mat-raised-button class="btn-warning btn-block mx-3">
+                Reset
+                <i class="fa fa-ban" aria-hidden="true"></i>
+              </button>
+            </div> -->
+          </div>
+
+
+        </form>
+
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

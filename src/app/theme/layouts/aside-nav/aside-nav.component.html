@@ -1,0 +1,476 @@
+<!-- BEGIN: Left Aside -->
+<button class="m-aside-left-close  m-aside-left-close--skin-dark" id="m_aside_left_close_btn" appunwraptag="">
+  <i class="la la-close"></i>
+</button>
+<div id="m_aside_left" class="m-grid__item	m-aside-left  m-aside-left--skin-dark ">
+  <!-- BEGIN: Aside Menu -->
+  <div id="m_ver_menu" class="m-aside-menu  m-aside-menu--skin-dark m-aside-menu--submenu-skin-dark" data-menu-vertical="true"
+    data-menu-scrollable="true" data-menu-dropdown-timeout="500">
+    <ul class="m-menu__nav  m-menu__nav--dropdown-submenu-arrow">
+
+      <li class="m-menu__item " routerLink="/dashboard" routerLinkActive="m-menu__item--active" routerLinkActiveOptions="{ exact: true }"
+        aria-haspopup="true">
+        <a class="m-menu__link">
+          <app-aside-nav-link Name="Dashboard" Icon="flaticon-line-graph"></app-aside-nav-link>
+        </a>
+      </li>
+
+      <li *ngIf="userType !='ccm' && userType !='admin'" class="m-menu__item " [routerLink]="['/creator/creators','profile',userId,'view']"
+        routerLinkActive="m-menu__item--active" routerLinkActiveOptions="{ exact: true }" aria-haspopup="true">
+        <a class="m-menu__link">
+          <app-aside-nav-link Name="My Profile" Icon="flaticon-profile"></app-aside-nav-link>
+        </a>
+      </li>
+
+
+      <li class="m-menu__item" *ngIf="privilegeLinks['posts']>0" routerLink="/user/feeds" routerLinkActive="m-menu__item--active"
+        routerLinkActiveOptions="{ exact: true }" aria-haspopup="true">
+        <a class="m-menu__link">
+          <app-aside-nav-link Name=" Content Feed" Icon="flaticon-notes"></app-aside-nav-link>
+        </a>
+      </li>
+
+      <!-- user managment -->
+      <li *ngIf="userType =='cc' || 
+                 userType =='ccm' || 
+                 userType =='admin'" class="m-menu__item m-menu__item--submenu m-menu__item--open" aria-haspopup="true"
+        data-menu-submenu-toggle="hover">
+        <a href="#" class="m-menu__link m-menu__toggle">
+          <i class="m-menu__link-icon flaticon-user-settings"></i>
+          <span class="m-menu__link-text">
+            User Management
+          </span>
+          <i class="m-menu__ver-arrow la la-angle-right"></i>
+        </a>
+        <div class="m-menu__submenu" style="display: block;">
+          <span class="m-menu__arrow"></span>
+          <ul class="m-menu__subnav">
+
+            <li class="m-menu__item  m-menu__item--parent" aria-haspopup="true">
+              <i class="m-menu__link-icon 	flaticon-users"></i>
+              <a href="#" class="m-menu__link">
+                <span class="m-menu__link-text">
+                  User Management
+                </span>
+              </a>
+            </li>
+
+            <li class="m-menu__item" 
+                *ngIf="privilegeLinks['get_subscribers']>0" 
+                (click)="gotoSubscriber()"
+              routerLinkActive="m-menu__item--active" routerLinkActiveOptions="{ exact: true }" aria-haspopup="true">
+              <a class="m-menu__link">
+                <i class="m-menu__link-bullet m-menu__link-bullet--dot">
+                  <span></span>
+                </i>
+                <span class="m-menu__link-text">
+                  Subscriber
+                </span>
+              </a>
+            </li>
+
+            <li *ngIf="userType=='admin'" class="m-menu__item" routerLink="/creator/creators/profile/list" routerLinkActive="m-menu__item--active"
+              routerLinkActiveOptions="{ exact: true }" aria-haspopup="true">
+              <a class="m-menu__link">
+                <i class="m-menu__link-bullet m-menu__link-bullet--dot">
+                  <span></span>
+                </i>
+                <span class="m-menu__link-text">
+                  Content Creators
+                </span>
+              </a>
+            </li>
+
+            <li *ngIf="userType=='admin'" class="m-menu__item" aria-haspopup="true" routerLink="/creator/managers/profile/list" routerLinkActive="m-menu__item--active"
+              routerLinkActiveOptions="{ exact: true }">
+              <a class="m-menu__link">
+                <i class="m-menu__link-bullet m-menu__link-bullet--dot">
+                  <span></span>
+                </i>
+                <span class="m-menu__link-text">
+                  Content Creator Managers
+                </span>
+              </a>
+            </li>
+
+            <li *ngIf="userType=='admin'" class="m-menu__item" aria-haspopup="true" routerLink="/admin/admins/profile/list" routerLinkActive="m-menu__item--active"
+              routerLinkActiveOptions="{ exact: true }">
+              <a class="m-menu__link">
+                <i class="m-menu__link-bullet m-menu__link-bullet--dot">
+                  <span></span>
+                </i>
+                <span class="m-menu__link-text">
+                  Admins
+                </span>
+              </a>
+            </li>
+
+          </ul>
+        </div>
+      </li>
+
+
+      <li *ngIf="(userType =='cc' || userType =='ccm' || userType =='admin') && privilegeLinks['posts']>1" class="m-menu__item "
+        routerLink="/creator/post/add" routerLinkActive="m-menu__item--active" routerLinkActiveOptions="{ exact: true }" aria-haspopup="true">
+        <a class="m-menu__link">
+          <app-aside-nav-link Name="Add Post" Icon="flaticon-user"></app-aside-nav-link>
+        </a>
+      </li>
+      <!--********-****************** Contents -->
+
+      <!--********-******************  Order Management managment -->
+      <li class="m-menu__item  m-menu__item--submenu  m-menu__item--open" routerLinkActive="m-menu__item--active" routerLinkActiveOptions="{ exact: true }"
+        aria-haspopup="true" data-menu-submenu-toggle="hover">
+        <a href="#" class="m-menu__link m-menu__toggle">
+          <i class="m-menu__link-icon flaticon-user-settings"></i>
+          <span class="m-menu__link-text">
+            Order Management
+          </span>
+          <i class="m-menu__ver-arrow la la-angle-right"></i>
+        </a>
+        <div class="m-menu__submenu">
+          <span class="m-menu__arrow"></span>
+          <ul class="m-menu__subnav">
+
+            <li class="m-menu__item  m-menu__item--parent" routerLinkActive="m-menu__item--active" routerLinkActiveOptions="{ exact: true }"
+              aria-haspopup="true">
+              <i class="m-menu__link-icon 	flaticon-users"></i>
+              <a href="#" class="m-menu__link">
+                <span class="m-menu__link-text">
+                  Order Management
+                </span>
+              </a>
+            </li>
+
+            <li *ngIf="userType =='admin'" class="m-menu__item" routerLink="/admin/orders" routerLinkActive="m-menu__item--active" routerLinkActiveOptions="{ exact: true }"
+              aria-haspopup="true">
+              <a class="m-menu__link">
+                <i class="m-menu__link-bullet m-menu__link-bullet--dot">
+                  <span></span>
+                </i>
+                <span class="m-menu__link-text">
+                  All Orders
+                </span>
+              </a>
+            </li>
+
+            <li *ngIf="(userType =='cc' || userType =='ccm' || userType =='admin') && privilegeLinks['orders']>0" 
+              class="m-menu__item"
+              routerLink="/creator/orders" routerLinkActive="m-menu__item--active" routerLinkActiveOptions="{ exact: true }"
+              aria-haspopup="true">
+              <a class="m-menu__link">
+                <i class="m-menu__link-bullet m-menu__link-bullet--dot">
+                  <span></span>
+                </i>
+                <span class="m-menu__link-text">
+                  Creators Orders
+                </span>
+              </a>
+            </li>
+
+            <li class="m-menu__item" *ngIf="privilegeLinks['orders']>0" routerLink="/user/orders" routerLinkActive="m-menu__item--active"
+              routerLinkActiveOptions="{ exact: true }" aria-haspopup="true">
+              <a class="m-menu__link">
+                <i class="m-menu__link-bullet m-menu__link-bullet--dot">
+                  <span></span>
+                </i>
+                <span class="m-menu__link-text">
+                  User Orders
+                </span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </li>
+
+
+      <li class="m-menu__item  m-menu__item--submenu  m-menu__item--open" aria-haspopup="true" data-menu-submenu-toggle="hover">
+        <a href="#" class="m-menu__link m-menu__toggle">
+          <i class="m-menu__link-icon flaticon-user-settings"></i>
+          <span class="m-menu__link-text">
+            Reports
+          </span>
+          <i class="m-menu__ver-arrow la la-angle-right"></i>
+        </a>
+        <div class="m-menu__submenu">
+          <span class="m-menu__arrow"></span>
+          <ul class="m-menu__subnav">
+
+            <li class="m-menu__item  m-menu__item--parent" aria-haspopup="true">
+              <i class="m-menu__link-icon"></i>
+              <a href="#" class="m-menu__link">
+                <span class="m-menu__link-text">
+                  Reports
+                </span>
+              </a>
+            </li>
+
+            <li *ngIf="userType =='admin'" class="m-menu__item" routerLink="/admin/reports/subscriptions" routerLinkActive="m-menu__item--active"
+              routerLinkActiveOptions="{ exact: true }" aria-haspopup="true">
+              <a class="m-menu__link">
+                <i class="m-menu__link-bullet m-menu__link-bullet--dot">
+                  <span></span>
+                </i>
+                <span class="m-menu__link-text">
+                  Subscriptions
+                </span>
+              </a>
+            </li>
+
+            <li *ngIf="(userType =='cc' || userType =='ccm' || userType =='admin') && privilegeLinks['orders']>0"
+                class="m-menu__item" 
+                routerLink="/creator/reports/sales" 
+                routerLinkActive="m-menu__item--active"
+                routerLinkActiveOptions="{ exact: true }" aria-haspopup="true">
+              <a class="m-menu__link">
+                <i class="m-menu__link-bullet m-menu__link-bullet--dot">
+                  <span></span>
+                </i>
+                <span class="m-menu__link-text">
+                  Sales
+                </span>
+              </a>
+            </li>
+
+            <li *ngIf="userType =='admin'" class="m-menu__item" routerLink="/admin/reports/revenue" routerLinkActive="m-menu__item--active"
+              routerLinkActiveOptions="{ exact: true }" aria-haspopup="true">
+              <a class="m-menu__link">
+                <i class="m-menu__link-bullet m-menu__link-bullet--dot">
+                  <span></span>
+                </i>
+                <span class="m-menu__link-text">
+                  Average Revenue
+                </span>
+              </a>
+            </li>
+
+            <li *ngIf="userType =='admin'" class="m-menu__item" routerLink="/admin/reports/churnrate" routerLinkActive="m-menu__item--active"
+              routerLinkActiveOptions="{ exact: true }" aria-haspopup="true">
+              <a class="m-menu__link">
+                <i class="m-menu__link-bullet m-menu__link-bullet--dot">
+                  <span></span>
+                </i>
+                <span class="m-menu__link-text">
+                  Churn Rate
+                </span>
+              </a>
+            </li>
+
+            <li *ngIf="userType =='admin'" class="m-menu__item" routerLink="/creator/reports/engagement" routerLinkActive="m-menu__item--active"
+              routerLinkActiveOptions="{ exact: true }" aria-haspopup="true">
+              <a class="m-menu__link">
+                <i class="m-menu__link-bullet m-menu__link-bullet--dot">
+                  <span></span>
+                </i>
+                <span class="m-menu__link-text">
+                  Engagement
+                </span>
+              </a>
+            </li>
+
+            <li *ngIf="(userType =='cc' || userType =='ccm' || userType =='admin') && privilegeLinks['reports']>1" class="m-menu__item" routerLink="/creator/reports/pledgegrowth" routerLinkActive="m-menu__item--active"
+              routerLinkActiveOptions="{ exact: true }" aria-haspopup="true">
+              <a class="m-menu__link">
+                <i class="m-menu__link-bullet m-menu__link-bullet--dot">
+                  <span></span>
+                </i>
+                <span class="m-menu__link-text">
+                  Pledge Growth
+                </span>
+              </a>
+            </li>
+
+            <li *ngIf="(userType =='cc' || userType =='ccm' || userType =='admin') && privilegeLinks['reports']>1" class="m-menu__item" 
+              routerLink="/creator/reports/refundsummary" routerLinkActive="m-menu__item--active"
+              routerLinkActiveOptions="{ exact: true }" aria-haspopup="true">
+              <a class="m-menu__link">
+                <i class="m-menu__link-bullet m-menu__link-bullet--dot">
+                  <span></span>
+                </i>
+                <span class="m-menu__link-text">
+                  Refund Summary
+                </span>
+              </a>
+            </li>
+
+            <li *ngIf="(userType =='cc' || userType =='ccm' || userType =='admin') && privilegeLinks['reports']>1" class="m-menu__item" 
+                routerLink="/creator/reports/tiergrowth" routerLinkActive="m-menu__item--active"
+                routerLinkActiveOptions="{ exact: true }" aria-haspopup="true">
+                <a class="m-menu__link">
+                  <i class="m-menu__link-bullet m-menu__link-bullet--dot">
+                    <span></span>
+                  </i>
+                  <span class="m-menu__link-text">
+                      Tier Growth
+                  </span>
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      </li>
+
+      <!-- Campaign Settings -->
+      <li *ngIf="userType =='cc' || userType =='ccm' || userType =='admin'" class="m-menu__item  m-menu__item--submenu  m-menu__item--open"
+        aria-haspopup="true" data-menu-submenu-toggle="hover">
+        <a href="#" class="m-menu__link m-menu__toggle">
+          <i class="m-menu__link-icon"></i>
+          <span class="m-menu__link-text">
+            Campaign Settings
+          </span>
+          <i class="m-menu__ver-arrow la la-angle-right"></i>
+        </a>
+        <div class="m-menu__submenu">
+          <span class="m-menu__arrow"></span>
+          <ul class="m-menu__subnav">
+            <li class="m-menu__item  m-menu__item--parent" aria-haspopup="true">
+              <i class="m-menu__link-icon 	flaticon-users"></i>
+              <a href="#" class="m-menu__link">
+                <span class="m-menu__link-text">
+                  Campaign Settings
+                </span>
+              </a>
+            </li>
+            <li class="m-menu__item" *ngIf="privilegeLinks['tiers']>0" routerLink="/creator/tiers" routerLinkActive="m-menu__item--active"
+              routerLinkActiveOptions="{ exact: true }" aria-haspopup="true">
+              <a class="m-menu__link">
+                <i class="m-menu__link-bullet m-menu__link-bullet--dot">
+                  <span></span>
+                </i>
+                <span class="m-menu__link-text">
+                  Tiers
+                </span>
+              </a>
+            </li>
+            <li class="m-menu__item" *ngIf="privilegeLinks['skus']>0" routerLink="/creator/products" routerLinkActive="m-menu__item--active"
+              routerLinkActiveOptions="{ exact: true }" aria-haspopup="true">
+              <a class="m-menu__link">
+                <i class="m-menu__link-bullet m-menu__link-bullet--dot">
+                  <span></span>
+                </i>
+                <span class="m-menu__link-text">
+                  Products
+                </span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </li>
+
+
+
+      <!-- Global Settings -->
+      <li *ngIf="userType=='admin'" class="m-menu__item  m-menu__item--submenu  m-menu__item--open" routerLinkActiveOptions="{ exact: true }"
+        aria-haspopup="true" data-menu-submenu-toggle="hover">
+        <a href="#" class="m-menu__link m-menu__toggle">
+          <i class="m-menu__link-icon"></i>
+          <span class="m-menu__link-text">
+            Global Settings
+          </span>
+          <i class="m-menu__ver-arrow la la-angle-right"></i>
+        </a>
+        <div class="m-menu__submenu">
+          <span class="m-menu__arrow"></span>
+          <ul class="m-menu__subnav">
+            <li class="m-menu__item  m-menu__item--parent" aria-haspopup="true">
+              <i class="m-menu__link-icon"></i>
+              <a href="#" class="m-menu__link">
+                <span class="m-menu__link-text">
+                  Global Settings
+                </span>
+              </a>
+            </li>
+
+            <li class="m-menu__item" aria-haspopup="true" routerLink="/admin/association/all" routerLinkActive="m-menu__item--active"
+              routerLinkActiveOptions="{ exact: true }">
+              <a class="m-menu__link">
+                <i class="m-menu__link-bullet m-menu__link-bullet--dot">
+                  <span></span>
+                </i>
+                <span class="m-menu__link-text">
+                  CCM Association
+                </span>
+              </a>
+            </li>
+            <!-- Event -->
+            <li class="m-menu__item" aria-haspopup="true" routerLink="/admin/events/all" routerLinkActive="m-menu__item--active" routerLinkActiveOptions="{ exact: true }">
+              <a class="m-menu__link">
+                <i class="m-menu__link-bullet m-menu__link-bullet--dot">
+                  <span></span>
+                </i>
+                <span class="m-menu__link-text">
+                  Events
+                </span>
+              </a>
+            </li>
+
+            <li class="m-menu__item" aria-haspopup="true" routerLink="/admin/levels/all" routerLinkActive="m-menu__item--active">
+              <a class="m-menu__link">
+                <i class="m-menu__link-bullet m-menu__link-bullet--dot">
+                  <span></span>
+                </i>
+                <span class="m-menu__link-text">
+                  XP/Level
+                </span>
+              </a>
+            </li>
+            <li class="m-menu__item" aria-haspopup="true">
+              <a class="m-menu__link">
+                <i class="m-menu__link-bullet m-menu__link-bullet--dot">
+                  <span></span>
+                </i>
+                <span class="m-menu__link-text">
+                  Trophies
+                </span>
+              </a>
+            </li>
+            <li class="m-menu__item" aria-haspopup="true" routerLink="/admin/internal/registration" routerLinkActive="m-menu__item--active"
+              routerLinkActiveOptions="{ exact: true }">
+              <a class="m-menu__link">
+                <i class="m-menu__link-bullet m-menu__link-bullet--dot">
+                  <span></span>
+                </i>
+                <span class="m-menu__link-text">
+                  Internal registration
+                </span>
+              </a>
+            </li>
+            <li class="m-menu__item" routerLink="/admin/products" routerLinkActive="m-menu__item--active" routerLinkActiveOptions="{ exact: true }"
+              aria-haspopup="true">
+              <a class="m-menu__link">
+                <i class="m-menu__link-bullet m-menu__link-bullet--dot">
+                  <span></span>
+                </i>
+                <span class="m-menu__link-text">
+                  Products
+                </span>
+              </a>
+            </li>
+            <li class="m-menu__item" routerLink="/admin/screenshots" routerLinkActive="m-menu__item--active" routerLinkActiveOptions="{ exact: true }"
+              aria-haspopup="true">
+              <a class="m-menu__link">
+                <i class="m-menu__link-bullet m-menu__link-bullet--dot">
+                  <span></span>
+                </i>
+                <span class="m-menu__link-text">
+                  Screenshot Logs
+                </span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </li>
+
+    
+    <li  class="m-menu__item " [routerLink]="['/user/supporttickets']"
+    routerLinkActive="m-menu__item--active" routerLinkActiveOptions="{ exact: true }" aria-haspopup="true">
+    <a class="m-menu__link">
+      <app-aside-nav-link Name="Support Tickets" Icon=""></app-aside-nav-link>
+    </a>
+  </li>
+
+    </ul>
+  </div>
+  <!-- END: Aside Menu -->
+</div>
+<!-- END: Left Aside -->

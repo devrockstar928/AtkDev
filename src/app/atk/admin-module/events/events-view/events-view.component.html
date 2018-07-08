@@ -1,0 +1,71 @@
+<div class="card">
+  <div class="card-header text-center">
+    Event Informations
+    <button mat-raised-button class="btn btn-outline-primary float-right" routerLink="/admin/events/all">
+      back to list
+      <i class="fa fa-reply" aria-hidden="true"></i>
+    </button>
+  </div>
+  <mat-card>
+    <mat-card-content>
+      <form [formGroup]="eventForm" novalidate>
+        <div class="form-group row">
+          <label for="name" class="col-sm-2 col-form-label">Event Name</label>
+          <div class="col-sm-10">
+            <mat-form-field [style.display]="'block'">
+              <input matInput placeholder="Event Name" type="text" id="name" formControlName="event_name">
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label for="event_value" class="col-sm-2 col-form-label">Event Value</label>
+          <div class="col-sm-10">
+            <mat-form-field [style.display]="'block'">
+              <input matInput placeholder="Event Value" type="text" id="event_value" formControlName="event_value">
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label for="user_name" class="col-sm-2 col-form-label">Active Event</label>
+          <div class="col-sm-10">
+            <mat-checkbox formControlName="event_active">Active</mat-checkbox>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label for="event_frequency_times" class="col-sm-2 col-form-label">Frequency Times</label>
+          <div class="col-sm-10">
+            <mat-form-field [style.display]="'block'">
+              <input matInput placeholder="Event Frequency Times" type="text" id="event_frequency_times" formControlName="event_frequency_times">
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label for="event_frequency_unit" class="col-sm-2 col-form-label">Frequency Unit</label>
+          <div class="col-sm-10">
+            <mat-form-field [style.display]="'block'">
+              <mat-select placeholder="Event Frequency Unit" id="event_frequency_unit" formControlName="event_frequency_unit">
+                <mat-option value="once">Once</mat-option>
+                <mat-option value="daily">Daily</mat-option>
+                <mat-option value="monthly">Monthly</mat-option>
+                <mat-option value="per one dollar">Per One Dollar</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+
+
+        <div class="col-12 row my-3">
+          <div class="col-6 offset-3">
+            <button mat-raised-button [disabled]="eventForm.invalid" [ngClass]="{'bg-success text-white':!eventForm.invalid}" class=""
+              (click)="AddNewEvent($event)">Save</button>
+            <button mat-raised-button (click)="eventForm.reset()">Reset</button>
+          </div>
+        </div>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>

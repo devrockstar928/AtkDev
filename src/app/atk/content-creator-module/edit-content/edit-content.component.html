@@ -1,0 +1,92 @@
+<form  #postForm="ngForm">
+  <mat-card>
+    <mat-card-content>
+      <div class="row">
+        <div class="col-6" *ngIf="userType == 'admin'">
+          <div class="form-group">
+            <label>Content Creators</label>
+            <span class="ui-fluid">
+              <p-autoComplete [suggestions]="filtered" (completeMethod)="filterCountryMultiple($event)" styleClass="wid100" [minLength]="1"
+                placeholder="Content Creator" name="creators" field="name" [multiple]="true" [(ngModel)]="selectedContentCreator">
+              </p-autoComplete>
+            </span>
+          </div>
+        </div>
+
+        <div class="col-6">
+          <div class="form-group">
+            <label>Tiers</label>
+            <select [disabled]="userType == 'admin' && selectedContentCreator.length ==0" class="form-control" [(ngModel)]="postContent.tierid"
+              name="tierid">
+              <option [value]="tier.id" *ngFor="let tier of tiresValues">{{tier.tier_name}}</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <!------------------------------------------------------------------>
+    </mat-card-content>
+    <mat-card-content>
+      <mat-tab-group>
+        <!-------------------------------------------------------------------------->
+        <mat-tab label="Text" disabled  *ngIf="currentContent?.post_data_type=='text'">
+          <div class="p-4">
+            <textarea rows="10" cols="150" name="description" [(ngModel)]="textPostValue" class="form-control" placeholder="enter your post">
+            </textarea>
+          </div>
+        </mat-tab>
+        <!-------------------------------------------------------------------------->
+        <mat-tab label="Image" disabled *ngIf="currentContent?.post_data_type=='image'">
+          <div class="row p-4">
+            <div class="col-4">
+              <div class="row">
+                <label type="button" class="btn btn-primary">
+                  <input disabled type="file" name="userPhoto" accept="image/*"  />
+                </label>
+              </div>
+              <div class="row">
+                <mat-checkbox name="forsale" [(ngModel)]="postContent.forsale"> For Sale</mat-checkbox>
+              </div>
+            </div>
+            <div class="col-8">
+              <textarea rows="4" cols="90" class="form-control" name="description" [(ngModel)]="postContent.description" placeholder="set description here .............">
+              </textarea>
+              <br />
+            </div>
+          </div>
+          <div class="col border border-dark" [hidden]="!selectPhoto">
+            <img crossorigin [src]="selectPhoto" alt="your image" width="560" height="340" />
+          </div>
+        </mat-tab>
+        <!-------------------------------------------------------------------------->
+        <mat-tab label="Video" disabled *ngIf="postContent?.post_data_type=='video'">
+          <div class="row p-4">
+            <div class="col-4">
+              <div class="row">
+                <label type="button" class="btn btn-primary">
+                    <input disabled type="file" name="userPhoto"  accept="video/*"  />
+                </label>
+              </div>
+            </div>
+            <div class="col-8">
+              <textarea rows="4" cols="90" class="form-control" name="description" [(ngModel)]="postContent.description" placeholder="set description here .............">
+              </textarea>
+              <br />
+            </div>
+          </div>
+          <div class="col border border-dark" [hidden]="!selectVideo">
+            <video #videoTag width="560" height="340" controls autoplay>
+              <source [src]="selectVideo" type="video/mp4">
+              <!-- <source src="movie.ogg" type="video/ogg"> -->
+              Your browser does not support the video tag.
+            </video>
+          </div>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-card-content>
+    <mat-card-content>
+      <div class="row p-4 justify-content-md-center">
+        <button mat-raised-button class="col-2 offset-5" (click)="save(postForm)">Save Post</button>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</form>

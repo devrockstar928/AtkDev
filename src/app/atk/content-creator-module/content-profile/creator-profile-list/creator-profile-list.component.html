@@ -1,0 +1,104 @@
+<div class="example-header">
+  <div class="row">
+    <div class="col-10">
+      <mat-form-field>
+        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+      </mat-form-field>
+    </div>
+    <div class="col justify-content-end">
+      <button mat-button [matMenuTriggerFor]="menu">
+        <i class="fa fa-ellipsis-v"></i>
+      </button>
+      <mat-menu #menu="matMenu">
+        <mat-selection-list #list>
+          <mat-list-option [disabled]="col=='actions'" color="primary" [value]="col" (click)="colClicked(list)" selected *ngFor="let col of col">
+            {{col}}
+          </mat-list-option>
+        </mat-selection-list>
+      </mat-menu>
+    </div>
+  </div>
+</div>
+
+<div class="example-container mat-elevation-z8">
+
+  <mat-table [dataSource]="dataSource" matSort>
+
+    <!-- ID Column -->
+    <ng-container matColumnDef="profilePicture">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Avatar </mat-header-cell>
+      <mat-cell *matCellDef="let row">
+        <div class="m-card-user__pic">
+          <img width="60" height="60" [src]="row.profilePicture" class="m--img-rounded m--marginless" alt="" />
+        </div>
+      </mat-cell>
+    </ng-container>
+
+    <!-- ID Column -->
+    <ng-container matColumnDef="userID" *ngIf="checkIfCol('userID')">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> ID </mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.userID}} </mat-cell>
+    </ng-container>
+
+    <!-- Progress Column -->
+    <ng-container matColumnDef="fullName" *ngIf="checkIfCol('fullName')">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Full Name </mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.fullName}} </mat-cell>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="email" *ngIf="checkIfCol('email')">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Email </mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.email}} </mat-cell>
+    </ng-container>
+
+    <!-- Color Column -->
+    <ng-container matColumnDef="level" *ngIf="checkIfCol('level')">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Level </mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.level}} </mat-cell>
+    </ng-container>
+
+    <!-- Color Column -->
+    <ng-container matColumnDef="xP" *ngIf="checkIfCol('xP')">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Xp </mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.xP}} </mat-cell>
+    </ng-container>
+
+    <!-- Color Column -->
+    <ng-container matColumnDef="numOfPosts" *ngIf="checkIfCol('numOfPosts')">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> # Of Posts </mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.numOfPosts}} </mat-cell>
+    </ng-container>
+
+    <!-- Color Column -->
+    <ng-container matColumnDef="numOfTiers" *ngIf="checkIfCol('numOfTiers')">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> # Of Tiers </mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.numOfTiers}} </mat-cell>
+    </ng-container>
+
+    <!-- actions Column -->
+    <ng-container matColumnDef="actions">
+      <mat-header-cell *matHeaderCellDef> Actions </mat-header-cell>
+      <mat-cell *matCellDef="let row">
+        <button mat-button [matMenuTriggerFor]="menu">
+          <i class="fa fa-ellipsis-v"></i>
+        </button>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item (click)="viewProfile(row)">
+            <i class="fa fa-eye"></i> View</button>
+          <button mat-menu-item (click)="editProfile(row)">
+            <i class="fa fa-edit"></i> Edit</button>
+          <button mat-menu-item (click)="deleteProfile(row)">
+            <i class="fa fa-trash"></i> Remove</button>
+        </mat-menu>
+      </mat-cell>
+    </ng-container>
+
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;">
+    </mat-row>
+  </mat-table>
+
+  <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+</div>

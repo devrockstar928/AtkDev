@@ -1,0 +1,13 @@
+.mat-column-cc_users { flex: 0 0 15%; }
+.mat-column-ccm_users { flex: 0 0 15%; }
+.mat-column-posts { flex: 0 0 6%; }
+.mat-column-likes { flex: 0 0 6%; }
+.mat-column-comments { flex: 0 0 6%; }
+.mat-column-block_users { flex: 0 0 6%; }
+.mat-column-chat_messages { flex: 0 0 6%; }
+.mat-column-get_subscribers { flex: 0 0 6%; }
+.mat-column-orders { flex: 0 0 6%; }
+.mat-column-reports { flex: 0 0 6%; }
+.mat-column-skus { flex: 0 0 6%; }
+/* .mat-column-createdAt { flex: 0 0 6%; } */
+/* .mat-column-actions { flex: 0 0 6%; } */

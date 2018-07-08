@@ -1,0 +1,172 @@
+<!-- <form class="m-form m-form--fit m-form--label-align-right m-form--group-seperator-dashed"> -->
+  <form>
+    <div class="m-portlet__body">
+      <div class="form-group m-form__group row">
+        <label class="col-2 col-form-label">
+          First Name
+        </label>
+        <div class="col-10">
+          <input [value]="userCard?.firstName" [ngClass]="{'is-valid':userCard?.firstName}" class="form-control m-input" type="text"
+            placeholder="enter your name...">
+        </div>
+      </div>
+      <!-----------------------------end of firstname -------------->
+      <div class="form-group m-form__group row">
+        <label class="col-2 col-form-label">
+          Last Name
+        </label>
+        <div class="col-10">
+          <input [value]="userCard?.secondName" class="form-control m-input" type="text" placeholder="enter your surname...">
+        </div>
+      </div>
+      <!-----------------------------end of lastname -------------->
+      <div class="form-group m-form__group row">
+        <label class="col-2 col-form-label">
+          User Name
+        </label>
+        <div class="col-10">
+          <input [value]="userCard?.username" [ngClass]="{'is-valid':userCard?.username}" class="form-control m-input" type="text" placeholder="enter your alias...">
+        </div>
+      </div>
+      <!-----------------------------end of username -------------->
+      <div class="form-group m-form__group row">
+        <label class="col-2 col-form-label">
+          Email
+        </label>
+        <div class="col-10">
+          <input [value]="userCard?.email" [ngClass]="{'is-valid':userCard?.email}" class="form-control m-input" type="text" placeholder="Email ...">
+        </div>
+      </div>
+      <!-----------------------------end of description -------------->
+  
+      <fieldset>
+        <legend>Address:</legend>
+  
+        <div class="row">
+          <div class="col offset-1">
+  
+            <div class="form-group m-form__group row">
+              <label class="col-2 col-form-label">
+                Country
+              </label>
+              <div class="col-10">
+                <input [value]="userCard?.address.country" [ngClass]="{'is-valid':userCard?.country}" class="form-control m-input" type="text" placeholder="enter your country...">
+              </div>
+            </div>
+            <!-----------------------------end of countrt -------------->
+            <div class="form-group m-form__group row">
+              <label class="col-2 col-form-label">
+                City
+              </label>
+              <div class="col-10">
+                <input [value]="userCard?.address.city" class="form-control m-input" type="text" placeholder="enter your city.....">
+              </div>
+            </div>
+            <!-----------------------------end of city -------------->
+            <div class="form-group m-form__group row">
+              <label class="col-2 col-form-label">
+                Line 1
+              </label>
+              <div class="col-10">
+                <input [value]="userCard?.address.streetC" class="form-control m-input" type="text" placeholder="enter your line...">
+              </div>
+            </div>
+            <!-----------------------------end of username -------------->
+            <div class="form-group m-form__group row">
+              <label class="col-2 col-form-label">
+                State
+              </label>
+              <div class="col-10">
+                <input [value]="userCard?.address.state" class="form-control m-input" type="text" placeholder="enter your state...">
+              </div>
+            </div>
+            <!-----------------------------end of State -------------->
+            <div class="form-group m-form__group row">
+              <label class="col-2 col-form-label">
+                Postal Code
+              </label>
+              <div class="col-10">
+                <input [value]="userCard?.address.zipcode" [ngClass]="{'is-valid':userCard?.address.zipcode}" class="form-control m-input" type="text" placeholder="enter your postalcode...">
+              </div>
+            </div>
+            <!-----------------------------end of Postal Code -------------->
+          </div>
+        </div>
+  
+      </fieldset>
+      <!------------------------------ address fieldset ------------------------------------------------>
+      <fieldset>
+        <legend>Social Media:</legend>
+  
+        <div class="row">
+          <div class="col offset-1">
+  
+            <div class="form-group m-form__group row">
+              <label class="col-2 col-form-label">
+                Personal Website
+              </label>
+              <div class="col-10">
+                <input [value]="userCard?.website" class="form-control m-input" type="text" placeholder="enter your Personal Website...">
+              </div>
+            </div>
+            <!-----------------------------end of Personal Website -------------->
+            <div class="form-group m-form__group row">
+              <label class="col-2 col-form-label">
+                Twitch
+              </label>
+              <div class="col-10">
+                <input [value]="userCard?.twitch" [ngClass]="{'is-valid':userCard?.twitch}" class="form-control m-input" type="text" placeholder="enter your Twitch.....">
+              </div>
+            </div>
+            <!-----------------------------end of Twitch -------------->
+            <div class="form-group m-form__group row">
+              <label class="col-2 col-form-label">
+                Facebook
+              </label>
+              <div class="col-10">
+                <input [value]="userCard?.facebook" class="form-control m-input" type="text" placeholder="enter your Facebook...">
+              </div>
+            </div>
+            <!-----------------------------end of Facebook -------------->
+            <div class="form-group m-form__group row">
+              <label class="col-2 col-form-label">
+                Twitter
+              </label>
+              <div class="col-10">
+                <input [value]="userCard?.twitter" class="form-control m-input" type="text" placeholder="enter your Twitter...">
+              </div>
+            </div>
+            <!-----------------------------end of Twitter -------------->
+            <div class="form-group m-form__group row">
+              <label class="col-2 col-form-label">
+                Instagram
+              </label>
+              <div class="col-10">
+                <input [value]="userCard?.instagram" class="form-control m-input" type="text" placeholder="enter your Instagram...">
+              </div>
+            </div>
+            <!-----------------------------end of Instagram -------------->
+          </div>
+        </div>
+  
+      </fieldset>
+      <!------------------------------ address fieldset ------------------------------------------------>
+      <!------------------------------------------------------------------------------>
+      <div class="m-portlet__foot m-portlet__foot--fit">
+        <div class="m-form__actions">
+          <div class="row">
+            <div class="col-2"></div>
+            <div class="col-10">
+              <button class="btn btn-success">
+                Submit
+              </button>
+              <button class="btn btn-secondary">
+                Cancel
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+  

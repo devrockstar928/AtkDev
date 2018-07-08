@@ -1,0 +1,101 @@
+<div class="card-header text-center text-primary">
+  <h3>Search</h3>
+</div>
+<mat-card>
+  <mat-card-content>
+    <div class="row">
+      <div class="col">
+        <mat-form-field [style.display]="'block'">
+          <mat-select placeholder="Select Tier" [(ngModel)]="tierid">
+            <mat-option [value]="tier.id" *ngFor="let tier of tiresValues">{{tier.tier_name}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="col">
+        <mat-form-field [style.display]="'block'">
+          <mat-select placeholder="Date Type" [(ngModel)]="searchObj.dateRangeType">
+            <mat-option value="c_at">Created Date</mat-option>
+            <mat-option value="e_at"> End Date </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="col">
+        <mat-form-field [style.display]="'block'" (click)="start.open()">
+          <input matInput [matDatepicker]="start" placeholder="Choose a date" [(ngModel)]="searchObj.startDate" [value]="searchObj.startDate">
+          <mat-datepicker-toggle matSuffix [for]="start"></mat-datepicker-toggle>
+          <mat-datepicker touchUi="true" #start></mat-datepicker>
+        </mat-form-field>
+      </div>
+      <div class="col">
+        <mat-form-field [style.display]="'block'" (click)="end.open()">
+          <input matInput [matDatepicker]="end" placeholder="Choose a date" [(ngModel)]="searchObj.endDate" [value]="searchObj.endDate">
+          <mat-datepicker-toggle matSuffix [for]="end"></mat-datepicker-toggle>
+          <mat-datepicker touchUi="true" #end></mat-datepicker>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="d-flex justify-content-center">
+      <button mat-raised-button (click)="search()" class="btn-primary">Search</button>
+    </div>
+  </mat-card-content>
+</mat-card>
+<hr />
+<mat-card>
+  <mat-card-content>
+    <div class="card">
+      <div class="body" id="chartDiv">
+
+        <ngx-charts-bar-vertical 
+                [view]="view" 
+                [scheme]="colorScheme" 
+                [results]="single" 
+                [gradient]="false" 
+                [xAxis]="true" 
+                [yAxis]="true"
+                [legend]="true" 
+                [xAxisTickFormatting]="setXFormatting" 
+                [showXAxisLabel]="true" 
+                [showYAxisLabel]="true" 
+                [xAxisLabel]="'Month'" 
+                [yAxisLabel]="'Value'">
+        </ngx-charts-bar-vertical>
+
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>
+<hr />
+<mat-card>
+  <mat-card-content>
+    <div class="row">
+      <div class="col-2"></div>
+      <div class="col-8">
+        <table class="table table-stripedS">
+          <thead>
+            <tr>
+              <th>
+                <b>Month</b>
+              </th>
+              <th>
+                <b>Tier Growth</b>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- <tr *ngFor="let row of resultData;let i=index;">
+              <td>{{monthNames[i]}}</td>
+              <td>{{row.count | currency}}</td>
+            </tr> -->
+            <tr *ngFor="let row of resultData">
+              <td>{{row.date_trunc | date:'shortDate'}}</td>
+              <td>{{row.count}}</td>
+            </tr>
+          </tbody>
+        </table>
+        <!-- <mat-paginator (page)="paginate($event)" [length]="100" [pageSize]="5" [pageSizeOptions]="[5, 10, 25, 50]"></mat-paginator> -->
+      </div>
+      <div class="col-2"></div>
+    </div>
+
+  </mat-card-content>
+</mat-card>

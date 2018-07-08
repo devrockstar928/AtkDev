@@ -1,0 +1,175 @@
+<div class="card-header text-center text-primary"><h3>Search</h3></div>
+<mat-card>
+  <mat-card-content>
+    <div class="row">
+      <div class="col-4">
+        <!-- <mat-form-field [style.display]="'block'">
+          <input type="text" matInput [matAutocomplete]="ccauto" [formControl]="ccField" placeholder="Select Content Ceator">
+          <mat-autocomplete #ccauto="matAutocomplete" [displayWith]="displayFn">
+            <mat-option *ngFor="let cc of ccList$ | async" [value]="cc">
+              <img alt="" class="p-1 rounded-circle" height="35" [src]="cc.profile_picture">
+              <span>{{cc?.fullName}}</span>
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field> -->
+        <mat-form-field [style.display]="'block'">
+            <mat-select placeholder="Select Content Ceator" [(ngModel)]="searchObj.cc">
+              <mat-option value="" [disabled]="true"><small class="text-muted">Select Content Ceator</small></mat-option>
+              <mat-option *ngFor="let cc of ccList" [value]="cc.id"> {{cc?.fullName}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+      </div>
+      <div class="col-4">
+        <mat-form-field [style.display]="'block'">
+          <mat-select placeholder="Type" [(ngModel)]="searchObj.type">
+            <mat-option value="add"> Add </mat-option>
+            <mat-option value="cancel"> Cancel </mat-option>
+            <mat-option value="upgrade"> Upgrade </mat-option>
+            <mat-option value="downgrade"> Downgrade </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="col-4">
+        <mat-form-field [style.display]="'block'">
+          <mat-select placeholder="Date Type" [(ngModel)]="searchObj.dateRangeType">
+            <mat-option value="c_at"> Created Date </mat-option>
+            <mat-option value="e_at"> End Date </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="col-6">
+          <mat-form-field [style.display]="'block'" (click)="start.open()">
+            <input matInput [matDatepicker]="start" placeholder="Choose a date" [(ngModel)]="searchObj.startDate" [value]="searchObj.startDate">
+            <mat-datepicker-toggle matSuffix [for]="start"></mat-datepicker-toggle>
+            <mat-datepicker touchUi="true" #start></mat-datepicker>
+          </mat-form-field>
+        </div>
+      <div class="col-6">
+        <mat-form-field [style.display]="'block'" (click)="end.open()">
+          <input matInput [matDatepicker]="end" placeholder="Choose a date" [(ngModel)]="searchObj.endDate" [value]="searchObj.endDate">
+          <mat-datepicker-toggle matSuffix [for]="end"></mat-datepicker-toggle>
+          <mat-datepicker touchUi="true" #end></mat-datepicker>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="d-flex justify-content-center">
+      <button mat-raised-button (click)="search($event)" class="btn-primary">Search</button>
+    </div>
+  </mat-card-content>
+</mat-card>
+<hr />
+<mat-card>
+  <mat-card-content>
+    <div class="card">
+      <div class="body" id="chartDiv">
+        <ngx-charts-line-chart 
+        [view]="view"
+        [scheme]="colorScheme" 
+        [results]="multi" 
+        [gradient]="gradient" 
+        [xAxis]="showXAxis" 
+        [yAxis]="showYAxis"
+        [legend]="showLegend" 
+        [showXAxisLabel]="showXAxisLabel" 
+        [showYAxisLabel]="showYAxisLabel" 
+        [xAxisTickFormatting]="setXFormatting"
+        [xAxisLabel]="xAxisLabel"
+        [yAxisLabel]="yAxisLabel" 
+        [autoScale]="autoScale" 
+        (select)="onSelect($event)">
+        </ngx-charts-line-chart>
+
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>
+<hr />
+<mat-card>
+  <mat-card-content>
+    <div class="card">
+      <div class="card-body">
+        <mat-table [dataSource]="dataSource" matSort>
+
+          <!-- ID Column -->
+          <ng-container matColumnDef="id">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> ID </mat-header-cell>
+            <mat-cell *matCellDef="let row"> {{row.id}} </mat-cell>
+          </ng-container>
+
+          <!-- Progress Column -->
+          <ng-container matColumnDef="action_type">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Action Type </mat-header-cell>
+            <mat-cell *matCellDef="let row"> {{row.action_type}} </mat-cell>
+          </ng-container>
+
+          <!-- Name Column -->
+          <ng-container matColumnDef="cc_id">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> CC </mat-header-cell>
+            <mat-cell *matCellDef="let row"> {{row.cc_id}} </mat-cell>
+          </ng-container>
+
+          <!-- description Column -->
+          <ng-container matColumnDef="description">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Description </mat-header-cell>
+            <mat-cell *matCellDef="let row"> {{row.description}} </mat-cell>
+          </ng-container>
+
+          <!-- price Column -->
+          <ng-container matColumnDef="price">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Price </mat-header-cell>
+            <mat-cell *matCellDef="let row">{{row.price | currency}}</mat-cell>
+          </ng-container>
+
+          <!-- tier_id Column -->
+          <ng-container matColumnDef="tier_id">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> tier_id </mat-header-cell>
+            <mat-cell *matCellDef="let row">{{row.tier_id}}</mat-cell>
+          </ng-container>
+
+          <!-- user_id Column -->
+          <ng-container matColumnDef="user_id">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> user_id </mat-header-cell>
+            <mat-cell *matCellDef="let row">{{row.user_id}}</mat-cell>
+          </ng-container>
+
+          <!-- stripe_id Column -->
+          <ng-container matColumnDef="stripe_id">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> stripe_id </mat-header-cell>
+            <mat-cell *matCellDef="let row">{{row.stripe_id}}</mat-cell>
+          </ng-container>
+
+          <!-- created_at Column -->
+          <ng-container matColumnDef="created_at">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> created_at </mat-header-cell>
+            <mat-cell *matCellDef="let row">{{row.created_at | date:'shortDate'}}</mat-cell>
+          </ng-container>
+
+          <!-- end_date Column -->
+          <ng-container matColumnDef="end_date">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> End Date </mat-header-cell>
+            <mat-cell *matCellDef="let row">{{row.end_date | date:'shortDate'}}</mat-cell>
+          </ng-container>
+
+          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: displayedColumns;">
+          </mat-row>
+        </mat-table>
+        <div class="row">
+            <div class="col-3">
+              <mat-form-field (change)="paginate($event)">
+                Page size:
+                <input matInput [(ngModel)]="searchObj.length">
+              </mat-form-field>
+            </div>
+            <div class="col">
+              <mat-paginator (page)="paginate($event)"
+                              [length]="100" 
+                              [pageSize]="searchObj.length" 
+                              >
+              </mat-paginator>
+            </div>
+          </div>
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>

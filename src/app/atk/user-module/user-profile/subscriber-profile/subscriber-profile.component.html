@@ -1,0 +1,75 @@
+<div class="row">
+  <div class="col-12 pb-2" color="accent">
+    <div class="row card-header col-md-auto">
+      <div class="col p-0 pl-1" (click)="hideshowArea('Profile')">
+        <button [color]="showvlaue=='Profile'? 'accent' :''" class="btn-block" mat-raised-button>Profile</button>
+      </div>
+      <!-- <div class="col-2 p-0 pl-1" (click)="hideshowArea('Orders')">
+        <button [color]="showvlaue=='Orders'? 'accent' :''" class="btn-block" mat-raised-button>Orders</button>
+      </div> -->
+      <div class="col p-0 pl-1" (click)="hideshowArea('Subscribtions')">
+        <button [color]="showvlaue=='Subscribtions'? 'accent' :''" class="btn-block" mat-raised-button>Subscriptions</button>
+      </div>
+      <div class="col-2 p-0 pl-1">
+        <button mat-raised-button color="primary" routerLink="../../../">
+          back to list
+          <i class="fa fa-reply" aria-hidden="true"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+
+  <div class="col-8">
+    <mat-card>
+      <mat-card-content>
+        <div class="card">
+          <div class="card-header text-center bg-light">{{showvlaue}}</div>
+          <div class="card-body">
+            <div [hidden]="showvlaue!=='Profile'">
+              <app-subscriber-profile-data></app-subscriber-profile-data>
+            </div>
+            <!-- <div [hidden]="showvlaue!=='Orders'">
+                <app-subscriber-profile-orders></app-subscriber-profile-orders>
+              </div> -->
+            <div [hidden]="showvlaue!=='Subscribtions'">
+              <app-subscriber-profile-subs></app-subscriber-profile-subs>
+            </div>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+  <!----------------------basic info---------------------------------------------->
+  <div class="col-4">
+    <mat-accordion [multi]="true">
+      <mat-expansion-panel [expanded]="true">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Comments
+          </mat-panel-title>
+          <mat-panel-description>
+
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <app-subscriber-comments></app-subscriber-comments>
+      </mat-expansion-panel>
+      <!-------------------------------------------------------------------->
+      <mat-expansion-panel [expanded]="true">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Activities
+          </mat-panel-title>
+          <mat-panel-description>
+            User Stream
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <app-subscriber-stream></app-subscriber-stream>
+      </mat-expansion-panel>
+      <!-------------------------------------------------------------------->
+    </mat-accordion>
+
+  </div>
+  <!---=------------------------end of right side eara -->
+</div>
